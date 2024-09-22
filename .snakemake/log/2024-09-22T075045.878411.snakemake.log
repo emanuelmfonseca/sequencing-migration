@@ -1,0 +1,145 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                count
+---------------  -------
+10                     1
+11                     1
+4                      1
+5                      1
+6                      1
+7                      1
+all                    1
+generate_genome        1
+generate_snps          1
+total                  9
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:45 2024]
+localrule generate_snps:
+    input: /Users/emanuelmfonseca/project/sequencing-migration/scripts/demographic-simulation.py
+    output: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt
+    jobid: 5
+    reason: Missing output files: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:46 2024]
+Finished job 5.
+1 of 9 steps (11%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:46 2024]
+localrule generate_genome:
+    input: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt, /Users/emanuelmfonseca/project/sequencing-migration/scripts/genome-simulation.py, /Users/emanuelmfonseca/project/sequencing-migration
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    jobid: 4
+    reason: Missing output files: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta; Input files updated by another job: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:46 2024]
+Finished job 4.
+2 of 9 steps (22%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:46 2024]
+localrule 5:
+    input: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    output: data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    jobid: 8
+    reason: Missing output files: data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta; Input files updated by another job: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:46 2024]
+Finished job 8.
+3 of 9 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:46 2024]
+localrule 7:
+    input: data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    output: data/genome-simulations/genomes_2/fastq/genome_2_R1.fastq, data/genome-simulations/genomes_2/fastq/genome_2_R2.fastq
+    jobid: 7
+    reason: Missing output files: data/genome-simulations/genomes_2/fastq/genome_2_R1.fastq, data/genome-simulations/genomes_2/fastq/genome_2_R2.fastq; Input files updated by another job: data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:48 2024]
+Finished job 7.
+4 of 9 steps (44%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:48 2024]
+localrule 4:
+    input: data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta
+    output: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta
+    jobid: 3
+    reason: Missing output files: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta; Input files updated by another job: data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:48 2024]
+Finished job 3.
+5 of 9 steps (56%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:48 2024]
+localrule 6:
+    input: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta
+    output: data/genome-simulations/genomes_1/fastq/genome_1_R1.fastq, data/genome-simulations/genomes_1/fastq/genome_1_R2.fastq
+    jobid: 2
+    reason: Missing output files: data/genome-simulations/genomes_1/fastq/genome_1_R1.fastq, data/genome-simulations/genomes_1/fastq/genome_1_R2.fastq; Input files updated by another job: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:49 2024]
+Finished job 2.
+6 of 9 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:49 2024]
+localrule 10:
+    input: data/genome-simulations/genomes_1/fastq/genome_1_R1.fastq, data/genome-simulations/genomes_1/fastq/genome_1_R2.fastq
+    output: data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/trimmomatic_1.log
+    jobid: 1
+    reason: Missing output files: data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/trimmomatic_1.log, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq; Input files updated by another job: data/genome-simulations/genomes_1/fastq/genome_1_R2.fastq, data/genome-simulations/genomes_1/fastq/genome_1_R1.fastq
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:49 2024]
+Finished job 1.
+7 of 9 steps (78%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:49 2024]
+localrule 11:
+    input: data/genome-simulations/genomes_2/fastq/genome_2_R1.fastq, data/genome-simulations/genomes_2/fastq/genome_2_R2.fastq
+    output: data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log
+    jobid: 6
+    reason: Missing output files: data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq; Input files updated by another job: data/genome-simulations/genomes_2/fastq/genome_2_R1.fastq, data/genome-simulations/genomes_2/fastq/genome_2_R2.fastq
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:49 2024]
+Finished job 6.
+8 of 9 steps (89%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 07:50:49 2024]
+localrule all:
+    input: data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/trimmomatic_1.log, data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log
+    jobid: 0
+    reason: Input files updated by another job: data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log, data/genome-simulations/genomes_1/fastq_trimmed/trimmomatic_1.log, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 07:50:49 2024]
+Finished job 0.
+9 of 9 steps (100%) done
+Complete log: .snakemake/log/2024-09-22T075045.878411.snakemake.log

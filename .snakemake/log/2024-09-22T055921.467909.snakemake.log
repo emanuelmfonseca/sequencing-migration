@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule all in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 3:
+Missing input files for rule all:
+    affected files:
+        data/genome-simulations/genomes_1/fastqc/genome_1_fastqc.html
+        data/genome-simulations/genomes_2/fastqc/genome_2_fastqc.html

@@ -1,0 +1,4 @@
+Building DAG of jobs...
+WildcardError in rule 14 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 199:
+Wildcards in input files cannot be determined from output files: (rule 14, line 354, /Users/emanuelmfonseca/project/sequencing-migration/Snakefile)
+'weekly_run'

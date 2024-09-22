@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+4            1
+5            1
+6            1
+7            1
+all          1
+total        5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 05:24:40 2024]
+localrule 6:
+    input: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta
+    output: data/genome-simulations/genomes_2/fastqc/individual_genome_1_R1.fastq, data/genome-simulations/genomes_2/fastqc/individual_genome_1_R2.fastq
+    jobid: 5
+    reason: Missing output files: data/genome-simulations/genomes_2/fastqc/individual_genome_1_R1.fastq, data/genome-simulations/genomes_2/fastqc/individual_genome_1_R2.fastq
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule 6 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 53:
+Job 5  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/genome-simulations/genomes_2/fastqc/individual_genome_1_R1.fastq (missing locally, parent dir contents: individual_genome_2_R1.fastq, individual_genome_2_R2.fastq)
+data/genome-simulations/genomes_2/fastqc/individual_genome_1_R2.fastq (missing locally, parent dir contents: individual_genome_2_R1.fastq, individual_genome_2_R2.fastq)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-22T052440.226978.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

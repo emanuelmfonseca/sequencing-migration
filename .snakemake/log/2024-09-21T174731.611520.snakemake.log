@@ -1,0 +1,55 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                count
+---------------  -------
+all                    1
+generate_genome        1
+generate_snps          1
+total                  3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Sep 21 17:47:31 2024]
+localrule generate_snps:
+    input: /Users/emanuelmfonseca/project/sequencing-migration/scripts/demographic-simulation.py
+    output: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt
+    jobid: 2
+    reason: Missing output files: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sat Sep 21 17:47:31 2024]
+Finished job 2.
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Sep 21 17:47:31 2024]
+localrule generate_genome:
+    input: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt, /Users/emanuelmfonseca/project/sequencing-migration/scripts/genome-simulation.py, /Users/emanuelmfonseca/project/sequencing-migration
+    output: data/genome-simulations/genomes_1/reference_genome_1.fasta, data/genome-simulations/genomes_2/reference_genome_2.fasta, data/genome-simulations/genomes_1/individual_genome_1.fasta, data/genome-simulations/genomes_1/individual_genome_2.fasta, data/genome-simulations/genomes_2/individual_genome_1.fasta, data/genome-simulations/genomes_2/individual_genome_2.fasta
+    jobid: 1
+    reason: Missing output files: data/genome-simulations/genomes_2/individual_genome_1.fasta, data/genome-simulations/genomes_1/individual_genome_1.fasta, data/genome-simulations/genomes_1/individual_genome_2.fasta, data/genome-simulations/genomes_1/reference_genome_1.fasta, data/genome-simulations/genomes_2/reference_genome_2.fasta, data/genome-simulations/genomes_2/individual_genome_2.fasta; Input files updated by another job: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sat Sep 21 17:47:32 2024]
+Finished job 1.
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Sep 21 17:47:32 2024]
+localrule all:
+    input: data/genome-simulations/genomes_1/reference_genome_1.fasta, data/genome-simulations/genomes_2/reference_genome_2.fasta, data/genome-simulations/genomes_1/individual_genome_1.fasta, data/genome-simulations/genomes_1/individual_genome_2.fasta, data/genome-simulations/genomes_2/individual_genome_1.fasta, data/genome-simulations/genomes_2/individual_genome_2.fasta
+    jobid: 0
+    reason: Input files updated by another job: data/genome-simulations/genomes_2/individual_genome_1.fasta, data/genome-simulations/genomes_1/individual_genome_1.fasta, data/genome-simulations/genomes_1/individual_genome_2.fasta, data/genome-simulations/genomes_1/reference_genome_1.fasta, data/genome-simulations/genomes_2/reference_genome_2.fasta, data/genome-simulations/genomes_2/individual_genome_2.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sat Sep 21 17:47:32 2024]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: .snakemake/log/2024-09-21T174731.611520.snakemake.log

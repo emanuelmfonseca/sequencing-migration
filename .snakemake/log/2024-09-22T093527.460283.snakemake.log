@@ -1,0 +1,47 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+16           1
+17           1
+9            1
+all          1
+total        4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 09:35:27 2024]
+localrule 16:
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/aligned_genome/sorted_aligned_genome_1.bam
+    output: data/genome-simulations/genomes_1/gatk/genome_1.vcf
+    jobid: 15
+    reason: Missing output files: data/genome-simulations/genomes_1/gatk/genome_1.vcf
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 09:35:28 2024]
+Error in rule 16:
+    jobid: 15
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/aligned_genome/sorted_aligned_genome_1.bam
+    output: data/genome-simulations/genomes_1/gatk/genome_1.vcf
+    conda-env: /Users/emanuelmfonseca/project/sequencing-migration/.snakemake/conda/cce32f2bce268a135b12d86d179a18d6_
+    shell:
+        
+            # Run GATK HaplotypeCaller for variant calling
+            
+            # Run GATK HaplotypeCaller for variant calling
+            gatk HaplotypeCaller                 --reference data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta \  # Reference genome
+                --input data/genome-simulations/genomes_1/aligned_genome/sorted_aligned_genome_1.bam \ # Input BAM file
+                --output data/genome-simulations/genomes_1/gatk/genome_1.vcf         # Output VCF file
+            
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-22T093527.460283.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

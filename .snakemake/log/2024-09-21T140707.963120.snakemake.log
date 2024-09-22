@@ -1,0 +1,24 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job               count
+--------------  -------
+run_simulation        1
+total                 1
+
+Select jobs to execute...
+
+[Sat Sep 21 14:07:08 2024]
+rule run_simulation:
+    input: /Users/emanuelmfonseca/project/sequencing-migration/scripts/demographic-simulation.py
+    output: data/demographic-simulations/snp-matrix.txt
+    jobid: 0
+    reason: Missing output files: data/demographic-simulations/snp-matrix.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+RuleException in rule run_simulation in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 3:
+IndexError: list index out of range, when formatting the following:
+python {input} {output[0]} {output[1]}

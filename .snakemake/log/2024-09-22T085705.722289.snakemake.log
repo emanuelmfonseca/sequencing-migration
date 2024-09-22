@@ -1,0 +1,55 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+14           1
+15           1
+all          1
+total        3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 08:57:05 2024]
+localrule 14:
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/aligned_genome/aligned_genome_1.sam
+    jobid: 13
+    reason: Missing output files: data/genome-simulations/genomes_1/aligned_genome/aligned_genome_1.sam; Code has changed since last execution
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 08:57:05 2024]
+Finished job 13.
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 08:57:05 2024]
+localrule 15:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq
+    output: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/aligned_genome/aligned_genome_2.sam
+    jobid: 14
+    reason: Missing output files: data/genome-simulations/genomes_2/aligned_genome/aligned_genome_2.sam; Code has changed since last execution
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 08:57:05 2024]
+Finished job 14.
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 08:57:05 2024]
+localrule all:
+    input: data/genome-simulations/genomes_1/qc/genome_1_R1_fastqc.html, data/genome-simulations/genomes_1/qc/genome_1_R2_fastqc.html, data/genome-simulations/genomes_2/qc/genome_2_R1_fastqc.html, data/genome-simulations/genomes_2/qc/genome_2_R2_fastqc.html, data/genome-simulations/genomes_1/qc_trimmed/genome_1_R1_trimmed_fastqc.html, data/genome-simulations/genomes_1/qc_trimmed/genome_1_R2_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R1_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R2_trimmed_fastqc.html, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_1/aligned_genome/aligned_genome_1.sam, data/genome-simulations/genomes_2/aligned_genome/aligned_genome_2.sam
+    jobid: 0
+    reason: Input files updated by another job: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_2/aligned_genome/aligned_genome_2.sam, data/genome-simulations/genomes_1/aligned_genome/aligned_genome_1.sam, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 08:57:05 2024]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: .snakemake/log/2024-09-22T085705.722289.snakemake.log

@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                  count
+-----------------  -------
+genome_simulation        1
+total                    1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Sep 21 17:09:52 2024]
+localrule genome_simulation:
+    input: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt, /Users/emanuelmfonseca/project/sequencing-migration/scripts/genome-simulation.py, /Users/emanuelmfonseca/project/sequencing-migration
+    output: data/genome-simulations/genomes_1/reference_genome.fasta, data/genome-simulations/genomes_2/reference_genome.fasta, data/genome-simulations/genomes_1/individual_1.fasta, data/genome-simulations/genomes_1/individual_2.fasta, data/genome-simulations/genomes_2/individual_1.fasta, data/genome-simulations/genomes_2/individual_2.fasta
+    jobid: 0
+    reason: Missing output files: data/genome-simulations/genomes_1/individual_2.fasta, data/genome-simulations/genomes_2/reference_genome.fasta, data/genome-simulations/genomes_2/individual_2.fasta, data/genome-simulations/genomes_1/individual_1.fasta, data/genome-simulations/genomes_1/reference_genome.fasta, data/genome-simulations/genomes_2/individual_1.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule genome_simulation in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 15:
+Job 0 completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/genome-simulations/genomes_1/reference_genome.fasta (missing locally, parent dir contents: individual_genome_1, reference_genome_1, individual_genome_2)
+data/genome-simulations/genomes_2/reference_genome.fasta (missing locally, parent dir contents: individual_genome_1, individual_genome_2, reference_genome_2)
+data/genome-simulations/genomes_1/individual_1.fasta (missing locally, parent dir contents: individual_genome_1, reference_genome_1, individual_genome_2)
+data/genome-simulations/genomes_1/individual_2.fasta (missing locally, parent dir contents: individual_genome_1, reference_genome_1, individual_genome_2)
+data/genome-simulations/genomes_2/individual_1.fasta (missing locally, parent dir contents: individual_genome_1, individual_genome_2, reference_genome_2)
+data/genome-simulations/genomes_2/individual_2.fasta (missing locally, parent dir contents: individual_genome_1, individual_genome_2, reference_genome_2)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-21T170952.012330.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

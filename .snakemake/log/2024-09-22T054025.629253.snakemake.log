@@ -1,0 +1,32 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job               count
+--------------  -------
+all                   1
+generate_fastq        1
+total                 2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 05:40:25 2024]
+localrule generate_fastq:
+    input: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta, data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    output: data/genome-simulations/genomes_1/fastqc/genome_1, data/genome-simulations/genomes_2/fastqc/genome_2
+    jobid: 1
+    reason: Missing output files: data/genome-simulations/genomes_1/fastqc/genome_1, data/genome-simulations/genomes_2/fastqc/genome_2
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+RuleException in rule generate_fastq in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 74:
+NameError: The name 'weekly_run' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}, when formatting the following:
+
+
+        iss generate --model hiseq --genomes {input.multifasta} --n_reads 10000 --cpus 4 --output {output}
+        
+        rm data/genome-simulations/genomes_{weekly_run}/fastqc/*.txt data/genome-simulations/genomes_{weekly_run}/fastqc/*.vcf
+            
+        

@@ -1,0 +1,63 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+13           1
+14           1
+15           1
+16           1
+17           1
+all          1
+total        6
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 09:23:23 2024]
+localrule 15:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq
+    output: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.dict, data/genome-simulations/genomes_2/aligned_genome/aligned_genome_2.sam, data/genome-simulations/genomes_2/aligned_genome/aligned_genome_2.bam, data/genome-simulations/genomes_2/aligned_genome/sorted_aligned_genome_2.bam
+    jobid: 14
+    reason: Code has changed since last execution
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 09:23:24 2024]
+Finished job 14.
+1 of 6 steps (17%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 09:23:24 2024]
+localrule 17:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/aligned_genome/sorted_aligned_genome_2.bam
+    output: data/genome-simulations/genomes_2/gatk/genome_2.vcf
+    jobid: 16
+    reason: Missing output files: data/genome-simulations/genomes_2/gatk/genome_2.vcf; Input files updated by another job: data/genome-simulations/genomes_2/aligned_genome/sorted_aligned_genome_2.bam
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 09:23:25 2024]
+Error in rule 17:
+    jobid: 16
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/aligned_genome/sorted_aligned_genome_2.bam
+    output: data/genome-simulations/genomes_2/gatk/genome_2.vcf
+    conda-env: /Users/emanuelmfonseca/project/sequencing-migration/.snakemake/conda/cce32f2bce268a135b12d86d179a18d6_
+    shell:
+        
+            # Run GATK HaplotypeCaller for variant calling
+            
+            gatk HaplotypeCaller \
+                -R data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta \    # Reference genome
+                -I data/genome-simulations/genomes_2/aligned_genome/sorted_aligned_genome_2.bam \   # Sorted BAM file
+                -O data/genome-simulations/genomes_2/gatk/genome_2.vcf           # Output VCF file
+            
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-22T092323.503582.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

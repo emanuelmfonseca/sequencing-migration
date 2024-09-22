@@ -1,0 +1,70 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                    count
+-------------------  -------
+all                        1
+generate_genome            1
+generate_multifasta        1
+generate_snps              1
+total                      4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 06:10:40 2024]
+localrule generate_snps:
+    input: /Users/emanuelmfonseca/project/sequencing-migration/scripts/demographic-simulation.py
+    output: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt
+    jobid: 3
+    reason: Missing output files: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 06:10:40 2024]
+Finished job 3.
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 06:10:40 2024]
+localrule generate_genome:
+    input: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt, /Users/emanuelmfonseca/project/sequencing-migration/scripts/genome-simulation.py, /Users/emanuelmfonseca/project/sequencing-migration
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    jobid: 2
+    reason: Missing output files: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta; Input files updated by another job: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 06:10:40 2024]
+Finished job 2.
+2 of 4 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 06:10:40 2024]
+localrule generate_multifasta:
+    input: data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    output: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta, data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    jobid: 1
+    reason: Missing output files: data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta, data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta; Input files updated by another job: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 06:10:40 2024]
+Finished job 1.
+3 of 4 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 06:10:40 2024]
+localrule all:
+    input: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta, data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    jobid: 0
+    reason: Input files updated by another job: data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta, data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 06:10:40 2024]
+Finished job 0.
+4 of 4 steps (100%) done
+Complete log: .snakemake/log/2024-09-22T061039.994283.snakemake.log

@@ -1,0 +1,40 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+15           1
+all          1
+total        2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 08:50:42 2024]
+localrule 15:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq
+    output: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa
+    jobid: 14
+    reason: Missing output files: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 08:50:42 2024]
+Error in rule 15:
+    jobid: 14
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq
+    output: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa
+    conda-env: /Users/emanuelmfonseca/project/sequencing-migration/.snakemake/conda/cce32f2bce268a135b12d86d179a18d6_
+    shell:
+        
+            bwa index data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa
+            
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-22T085042.576890.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,40 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                    count
+-------------------  -------
+all                        1
+generate_multifasta        1
+total                      2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 05:39:41 2024]
+localrule generate_multifasta:
+    input: data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    output: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta, data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    jobid: 1
+    reason: Code has changed since last execution
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 05:39:41 2024]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 05:39:41 2024]
+localrule all:
+    input: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta, data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    jobid: 0
+    reason: Input files updated by another job: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta, data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 05:39:41 2024]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2024-09-22T053941.625641.snakemake.log

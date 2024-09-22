@@ -1,0 +1,55 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+11           1
+13           1
+all          1
+total        3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 08:18:47 2024]
+localrule 11:
+    input: data/genome-simulations/genomes_2/fastq/genome_2_R1.fastq, data/genome-simulations/genomes_2/fastq/genome_2_R2.fastq
+    output: data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log
+    jobid: 12
+    reason: Missing output files: data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 08:18:47 2024]
+Finished job 12.
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 08:18:47 2024]
+localrule 13:
+    input: data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq
+    output: data/genome-simulations/genomes_2/qc_trimmed/genome_2_R1_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R2_trimmed_fastqc.html
+    jobid: 11
+    reason: Missing output files: data/genome-simulations/genomes_2/qc_trimmed/genome_2_R2_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R1_trimmed_fastqc.html; Input files updated by another job: data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 08:18:52 2024]
+Finished job 11.
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 08:18:52 2024]
+localrule all:
+    input: data/genome-simulations/genomes_1/qc/genome_1_R1_fastqc.html, data/genome-simulations/genomes_1/qc/genome_1_R2_fastqc.html, data/genome-simulations/genomes_2/qc/genome_2_R1_fastqc.html, data/genome-simulations/genomes_2/qc/genome_2_R2_fastqc.html, data/genome-simulations/genomes_1/qc_trimmed/genome_1_R1_trimmed_fastqc.html, data/genome-simulations/genomes_1/qc_trimmed/genome_1_R2_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R1_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R2_trimmed_fastqc.html, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/trimmomatic_1.log, data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log
+    jobid: 0
+    reason: Input files updated by another job: data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R1_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R2_trimmed_fastqc.html, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/trimmomatic_2.log
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 08:18:52 2024]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: .snakemake/log/2024-09-22T081847.477786.snakemake.log
