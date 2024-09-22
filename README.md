@@ -72,9 +72,9 @@ The input data for this pipeline comes from **simulations** of genomic sequencin
 
 #### Main Parameters
 - working_directory: "/path/to/github_folder"  # Specify the full path to the working directory for your project
-- weekly_runs: 5  # Number of independent genomic runs to perform each week
-- nsamples: 100  # Number of individuals (samples) processed in each run
-- ncpus: 8  # Number of available CPU cores for parallel processing
+- weekly_runs: Number of independent genomic runs to perform each week
+- nsamples: Number of individuals (samples) processed in each run
+- ncpus: Number of available CPU cores for parallel processing
 
 
 2. **Run the Pipeline**:
