@@ -283,12 +283,3 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             # Run GATK HaplotypeCaller for variant calling
             gatk HaplotypeCaller --reference {input.reference} --input {input.bam} --output {output.vcf}
             """
-
-
-
-# Run GATK HaplotypeCaller for variant calling
-#gatk HaplotypeCaller --reference data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta --input data/genome-simulations/genomes_1/aligned_genome/sorted_aligned_genome_1.bam --output data/genome-simulations/genomes_1/gatk/genome_1.vcf
-
-#picard CreateSequenceDictionary R=/Users/emanuelmfonseca/project/sequencing-migration/data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta O=data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.dict
-
-#bwa mem mem -M -R @RG\tID:tsk_1 \tLB:tsk_1 \tPL:ILLUMINA\tPM:HISEQ\tSM:tsk_1 data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq > data/genome-simulations/genomes_2/aligned_genome/aligned_genome_2.sam
