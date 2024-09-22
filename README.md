@@ -70,11 +70,11 @@ The input data for this pipeline comes from **simulations** of genomic sequencin
 1. **Edit Configuration File**: 
    Modify the `config.yaml` file to specify the input files and paths:
 
-# Main Parameters
-working_directory: "/path/to/github_folder"  # Specify the full path to the working directory for your project
-weekly_runs: 5  # Number of independent genomic runs to perform each week
-nsamples: 100  # Number of individuals (samples) processed in each run
-ncpus: 8  # Number of available CPU cores for parallel processing
+#### Main Parameters
+- working_directory: "/path/to/github_folder"  # Specify the full path to the working directory for your project
+- weekly_runs: 5  # Number of independent genomic runs to perform each week
+- nsamples: 100  # Number of individuals (samples) processed in each run
+- ncpus: 8  # Number of available CPU cores for parallel processing
 
 
 2. **Run the Pipeline**:
