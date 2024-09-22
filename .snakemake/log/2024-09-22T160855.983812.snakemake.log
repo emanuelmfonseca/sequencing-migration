@@ -1,0 +1,11 @@
+Building DAG of jobs...
+WorkflowError:
+MissingInputException: Missing input files for rule 22:
+    output: data/genome-simulations/genomes_1/gatk/combined_genomes_run_1.g.vcf
+    affected files:
+        data/genome-simulations/genomes_1/demultiplexed/sample_1/sample_1_1.g.vcf
+        data/genome-simulations/genomes_1/demultiplexed/sample_2/sample_1_2.g.vcf
+MissingInputException: Missing input files for rule 24:
+    output: data/genome-simulations/genomes_1/gatk/combined_genomes_run_1.g.vcf
+    affected files:
+        data/genome-simulations/genomes_1/demultiplexed

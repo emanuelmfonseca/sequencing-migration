@@ -1,0 +1,97 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                count
+---------------  -------
+10                     1
+11                     1
+12                     1
+13                     1
+14                     1
+15                     1
+16                     1
+17                     1
+18                     1
+19                     1
+20                     1
+21                     1
+22                     1
+23                     1
+24                     1
+25                     1
+26                     1
+27                     1
+4                      1
+5                      1
+6                      1
+7                      1
+8                      1
+9                      1
+all                    1
+generate_genome        1
+generate_snps          1
+total                 27
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 16:27:46 2024]
+localrule generate_snps:
+    input: /Users/emanuelmfonseca/project/sequencing-migration/scripts/demographic-simulation.py
+    output: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt
+    jobid: 5
+    reason: Missing output files: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 16:27:46 2024]
+Finished job 5.
+1 of 27 steps (4%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 16:27:46 2024]
+localrule generate_genome:
+    input: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt, /Users/emanuelmfonseca/project/sequencing-migration/scripts/genome-simulation.py, /Users/emanuelmfonseca/project/sequencing-migration
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    jobid: 4
+    reason: Missing output files: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta; Input files updated by another job: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 16:27:47 2024]
+Finished job 4.
+2 of 27 steps (7%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 16:27:47 2024]
+localrule 27:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta
+    output: data/genome-simulations/genomes_2/gatk/combined_genomes_run_2.g.vcf
+    jobid: 26
+    reason: Missing output files: data/genome-simulations/genomes_2/gatk/combined_genomes_run_2.g.vcf; Input files updated by another job: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta
+    threads: 4
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 16:27:47 2024]
+Error in rule 27:
+    jobid: 26
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta
+    output: data/genome-simulations/genomes_2/gatk/combined_genomes_run_2.g.vcf
+    conda-env: /Users/emanuelmfonseca/project/sequencing-migration/.snakemake/conda/35420d6d323181dffcd0642cc29ad476_
+    shell:
+        
+            bam_files=$(find data/genome-simulations/genomes_2/demultiplexed -type f -name "*g.vcf" | sed 's/^/--variant /')
+            
+            # Run GATK HaplotypeCaller for variant calling
+            gatk CombineGVCFs --reference data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta $bam_files --output data/genome-simulations/genomes_2/gatk/combined_genomes_run_2.g.vcf
+            
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-22T162746.601107.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

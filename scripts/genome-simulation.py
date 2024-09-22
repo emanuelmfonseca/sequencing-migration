@@ -109,11 +109,11 @@ def main(working_directory, input_files):
             # Save individual genomes to FASTA file
             individual_genome_path = os.path.join(output_dir, f'individual_genome_{individual_idx+1}.fasta')
             with open(individual_genome_path, 'w') as ind_file:
-                _ = ind_file.write(f">Genome1_{individual_idx + 1}\n")
+                _ = ind_file.write(f">Ind{individual_idx + 1}_1\n")
                 for line in genome1_lines:
                     _ = ind_file.write(line + '\n')
                 
-                _ = ind_file.write(f">Genome2_{individual_idx + 1}\n")
+                _ = ind_file.write(f">Ind{individual_idx + 1}_2\n")
                 for line in genome2_lines:
                     _ = ind_file.write(line + '\n')
 

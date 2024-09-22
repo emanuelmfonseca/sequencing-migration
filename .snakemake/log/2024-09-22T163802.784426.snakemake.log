@@ -1,0 +1,33 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+26           1
+27           1
+all          1
+total        3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 16:38:02 2024]
+localrule 27:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta
+    output: data/genome-simulations/genomes_2/gatk/combined_genomes_run_2.g.vcf
+    jobid: 26
+    reason: Missing output files: data/genome-simulations/genomes_2/gatk/combined_genomes_run_2.g.vcf
+    threads: 4
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+RuleException in rule 27 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 365:
+NameError: The name 'outfile' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}, when formatting the following:
+
+            bam_files=$(find data/genome-simulations/genomes_{params.weekly_run}/demultiplexed -type f -name "*g.vcf" | sed 's/^/--variant /') > {outfile.bam}
+            
+            # Run GATK HaplotypeCaller for variant calling
+
+            

@@ -1,0 +1,85 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+22           1
+23           1
+24           1
+25           1
+all          1
+total        5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 13:52:00 2024]
+localrule 23:
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/demultiplexed/sample_2/sorted_aligned_genome_2.bam
+    output: data/genome-simulations/genomes_1/demultiplexed/sample_2/sample_1_2.g.vcf
+    jobid: 22
+    reason: Missing output files: data/genome-simulations/genomes_1/demultiplexed/sample_2/sample_1_2.g.vcf
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 13:52:02 2024]
+Finished job 22.
+1 of 5 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 13:52:02 2024]
+localrule 22:
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/demultiplexed/sample_1/sorted_aligned_genome_1.bam
+    output: data/genome-simulations/genomes_1/demultiplexed/sample_1/sample_1_1.g.vcf
+    jobid: 21
+    reason: Missing output files: data/genome-simulations/genomes_1/demultiplexed/sample_1/sample_1_1.g.vcf
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 13:52:04 2024]
+Finished job 21.
+2 of 5 steps (40%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 13:52:04 2024]
+localrule 24:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_1.bam
+    output: data/genome-simulations/genomes_2/demultiplexed/sample_1/sample_2_1.g.vcf
+    jobid: 23
+    reason: Missing output files: data/genome-simulations/genomes_2/demultiplexed/sample_1/sample_2_1.g.vcf
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 13:52:06 2024]
+Finished job 23.
+3 of 5 steps (60%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 13:52:06 2024]
+localrule 25:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2.bam
+    output: data/genome-simulations/genomes_2/demultiplexed/sample_2/sample_2_2.g.vcf
+    jobid: 24
+    reason: Missing output files: data/genome-simulations/genomes_2/demultiplexed/sample_2/sample_2_2.g.vcf
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 13:52:08 2024]
+Finished job 24.
+4 of 5 steps (80%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 13:52:08 2024]
+localrule all:
+    input: data/genome-simulations/genomes_1/qc/genome_1_R1_fastqc.html, data/genome-simulations/genomes_1/qc/genome_1_R2_fastqc.html, data/genome-simulations/genomes_2/qc/genome_2_R1_fastqc.html, data/genome-simulations/genomes_2/qc/genome_2_R2_fastqc.html, data/genome-simulations/genomes_1/qc_trimmed/genome_1_R1_trimmed_fastqc.html, data/genome-simulations/genomes_1/qc_trimmed/genome_1_R2_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R1_trimmed_fastqc.html, data/genome-simulations/genomes_2/qc_trimmed/genome_2_R2_trimmed_fastqc.html, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R1_trimmed.fastq, data/genome-simulations/genomes_2/fastq_trimmed/genome_2_R2_trimmed.fastq, data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_R1_demultiplexed.fastq, data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_R2_demultiplexed.fastq, data/genome-simulations/genomes_1/demultiplexed/sample_2/genome_1_Ind2_R1_demultiplexed.fastq, data/genome-simulations/genomes_1/demultiplexed/sample_2/genome_1_Ind2_R2_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R2_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R2_demultiplexed.fastq, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.fai, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_1/fasta/reference_genome_1.dict, data/genome-simulations/genomes_2/fasta/reference_genome_2.dict, data/genome-simulations/genomes_1/demultiplexed/sample_1/sorted_aligned_genome_1.bam.bai, data/genome-simulations/genomes_1/demultiplexed/sample_2/sorted_aligned_genome_2.bam.bai, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_1.bam.bai, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2.bam.bai, data/genome-simulations/genomes_1/demultiplexed/sample_1/sample_1_1.g.vcf, data/genome-simulations/genomes_1/demultiplexed/sample_2/sample_1_2.g.vcf, data/genome-simulations/genomes_2/demultiplexed/sample_1/sample_2_1.g.vcf, data/genome-simulations/genomes_2/demultiplexed/sample_2/sample_2_2.g.vcf
+    jobid: 0
+    reason: Input files updated by another job: data/genome-simulations/genomes_2/demultiplexed/sample_1/sample_2_1.g.vcf, data/genome-simulations/genomes_2/demultiplexed/sample_2/sample_2_2.g.vcf, data/genome-simulations/genomes_1/demultiplexed/sample_2/sample_1_2.g.vcf, data/genome-simulations/genomes_1/demultiplexed/sample_1/sample_1_1.g.vcf
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 13:52:08 2024]
+Finished job 0.
+5 of 5 steps (100%) done
+Complete log: .snakemake/log/2024-09-22T135200.679717.snakemake.log

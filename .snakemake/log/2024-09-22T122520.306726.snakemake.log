@@ -1,0 +1,13 @@
+Building DAG of jobs...
+AmbiguousRuleException:
+Rules 17 and 16 are ambiguous for the file data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt.
+Consider starting rule output with a unique prefix, constrain your wildcards, or use the ruleorder directive.
+Wildcards:
+	17: 
+	16: 
+Expected input files:
+	17: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta data/genome-simulations/genomes_1/demultiplexed/sample_2/genome_1_Ind2_R1_demultiplexed.fastq data/genome-simulations/genomes_1/demultiplexed/sample_2/genome_1_Ind2_R2_demultiplexed.fastq
+	16: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_R1_demultiplexed.fastq data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_R2_demultiplexed.fastq
+Expected output files:
+	17: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt data/genome-simulations/genomes_1/demultiplexed/sample_2/aligned_genome_1_Ind2.bam
+	16: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt data/genome-simulations/genomes_1/demultiplexed/sample_1/aligned_genome_1_Ind1.bam

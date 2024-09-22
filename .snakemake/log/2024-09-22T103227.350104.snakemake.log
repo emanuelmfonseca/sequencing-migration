@@ -1,0 +1,33 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+4            1
+5            1
+all          1
+total        3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 10:32:27 2024]
+localrule 5:
+    input: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    output: data/genome-simulations/genomes_2/multifasta/multifasta_genome_2.fasta
+    jobid: 4
+    reason: Code has changed since last execution; Params have changed since last execution
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+RuleException in rule 5 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 98:
+NameError: The name 'samples_id' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}, when formatting the following:
+
+            touch {output}  # Ensure the output file exists
+
+            n=params.nsamples; samples_id=$(for i in $(seq 1 $n); do echo -n ">s$i >s$i "; done)
+
+            paste {samples_id} {input.individual} >> {output}  # Concatenate individual genomes
+            

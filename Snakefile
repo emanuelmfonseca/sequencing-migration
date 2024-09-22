@@ -20,25 +20,38 @@ rule all:
             weekly_run=range(1, config["weekly_runs"] + 1),
             read=["R1", "R2"]
         ),
+
+        demu=expand(
+            "data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/genome_{weekly_run}_Ind{sample}_{read}_demultiplexed.fastq",
+            weekly_run=range(1, config["weekly_runs"] + 1),
+            sample=range(1, config['nsamples']+1),
+            read=["R1", "R2"]),
         
         index=expand(
             "data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta.{suffix}",
             weekly_run=range(1, config["weekly_runs"] + 1),
             suffix=['amb', 'ann', 'bwt', 'pac', 'sa', 'fai']
         ),
-
-        index_bam=expand(
-            "data/genome-simulations/genomes_{weekly_run}/aligned_genome/sorted_aligned_genome_{weekly_run}.bam.bai",
-            weekly_run=range(1, config["weekly_runs"] + 1)
-        ),
-
+                
         dicti=expand(
             "data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.dict",
             weekly_run=range(1, config["weekly_runs"] + 1)
         ),
 
-        vcf=expand(
-            "data/genome-simulations/genomes_{weekly_run}/gatk/genome_{weekly_run}.vcf",
+        index_bam=expand(
+            "data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/dedup_sorted_aligned_genome_{sample}.bam.bai",
+            weekly_run=range(1, config["weekly_runs"] + 1),
+            sample=range(1, config["nsamples"] + 1)
+        ),
+
+        g_vcf=expand(
+            "data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/sample_{weekly_run}_{sample}.g.vcf",
+            weekly_run=range(1, config["weekly_runs"] + 1),
+            sample=range(1, config["nsamples"] + 1)
+        ),
+
+        final_vcf=expand(
+            "data/fully-processed-data/genomes_fully_processed_run_{weekly_run}.vcf",
             weekly_run=range(1, config["weekly_runs"] + 1)
             )
 
@@ -92,10 +105,15 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
     rule:
         input:
             # Individual genome FASTA files for each run and sample
-            individual=expand(f"data/genome-simulations/genomes_{weekly_run}/fasta/individual_genome_{{ind}}.fasta", ind=range(1, config["nsamples"] + 1))
+            individual=expand(
+                "data/genome-simulations/genomes_{weekly_run}/fasta/individual_genome_{ind}.fasta",
+                weekly_run=weekly_run,
+                ind=range(1, config["nsamples"] + 1))
         output:
             # Multi-FASTA output file for each weekly run
             multifasta=f"data/genome-simulations/genomes_{weekly_run}/multifasta/multifasta_genome_{weekly_run}.fasta"
+        params:
+            nsamples=config["nsamples"]
         conda:
             # Specify the conda environment for dependencies
             "envs/environment.yml"  
@@ -209,36 +227,56 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             """
 
 
-# Align trimmed FASTQ files using BWA for each weekly run
+# This rule demultiplexes trimmed FASTQ files by sample for each weekly run.
 for weekly_run in range(1, config["weekly_runs"] + 1):
     rule:
         input:
-            # Reference genome and paired-end FASTQ files (R1, R2)
-            reference=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta",
-            fastq_trimmed=expand("data/genome-simulations/genomes_{weekly_run}/fastq_trimmed/genome_{weekly_run}_{read}_trimmed.fastq", weekly_run=weekly_run, read=["R1", "R2"])
+            # Specify the paths for the input FASTQ files (R1 and R2) for each weekly run.
+            fastq_trimmed=expand(
+                "data/genome-simulations/genomes_{weekly_run}/fastq_trimmed/genome_{weekly_run}_{read}_trimmed.fastq",
+                weekly_run=weekly_run, 
+                read=["R1", "R2"]
+            )
         output:
-            # Indexed reference files and sorted BAM
+            # Define the paths for the demultiplexed FASTQ files (one for each pattern and read).
+            demultiplexed=expand(
+                "data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/genome_{weekly_run}_Ind{sample}_{read}_demultiplexed.fastq",
+                weekly_run=weekly_run,
+                sample=range(1, config['nsamples']+1),
+                read=["R1", "R2"]
+            )
+        params:
+            # Store the current weekly run number.
+            weekly_run=weekly_run,
+            # Create patterns based on the number of samples.
+            patterns=["Ind" + str(i) for i in range(1, config['nsamples'] + 1)]  # List of patterns, not a string
+        conda:
+            # Specify the Conda environment.
+            "envs/environment.yml"
+        shell:
+            # Loop over patterns and demultiplex each one using seqkit.
+            """
+            for pattern in {params.patterns}; do
+                grep -A 3 "$pattern" {input.fastq_trimmed[0]} > data/genome-simulations/genomes_{params.weekly_run}/demultiplexed/sample_${{pattern:3}}/genome_{params.weekly_run}_${{pattern}}_R1_demultiplexed.fastq;
+                
+                grep -A 3 "$pattern" {input.fastq_trimmed[1]} > data/genome-simulations/genomes_{params.weekly_run}/demultiplexed/sample_${{pattern:3}}/genome_{params.weekly_run}_${{pattern}}_R2_demultiplexed.fastq;
+            done
+            """
+
+# Index reference genome and create auxiliary files for each weekly run
+for weekly_run in range(1, config["weekly_runs"] + 1):
+    rule:
+        input:
+            # Reference genome
+            reference=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta",
+        output:
+            # Indexed reference files
             index=expand("data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta.{suffix}", weekly_run=weekly_run, suffix=['amb', 'ann', 'bwt', 'pac', 'sa']),
             fai=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta.fai",
             dicti=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.dict",
-            sam=f"data/genome-simulations/genomes_{weekly_run}/aligned_genome/aligned_genome_{weekly_run}.sam",
-            bam=f"data/genome-simulations/genomes_{weekly_run}/aligned_genome/aligned_genome_{weekly_run}.bam",
-            sorted_bam=f"data/genome-simulations/genomes_{weekly_run}/aligned_genome/sorted_aligned_genome_{weekly_run}.bam",
-            index_bam=f"data/genome-simulations/genomes_{weekly_run}/aligned_genome/sorted_aligned_genome_{weekly_run}.bam.bai"
-        params:
-            weekly_run=weekly_run,
-            
-            # Define the read group parameters
-            RGID=f"tsk_{weekly_run}",    # Read group identifier
-            RGLB=f"tsk_{weekly_run}",    # Library identifier
-            RGPL="ILLUMINA",             # Platform
-            RGPM="HISEQ",                # Platform model
-            RGSM=f"tsk_{weekly_run}"     # Sample name
-
         conda:
-            # Use BWA in Conda environment
+            # Specify the Conda environment.
             "envs/environment.yml"
-        threads: config["ncpus"]  # Set number of threads for BWA
         shell:
             """
             # Index the reference genome
@@ -249,37 +287,105 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             
             # Generate the sequence dictionary (.dict) file using Picard
             picard CreateSequenceDictionary R={input.reference} O={output.dicti}
-            
-            # Align the trimmed FASTQ reads to the reference genome and output SAM file
-            bwa mem -M -R "@RG\\tID:{params.RGID}\\tLB:{params.RGLB}\\tPL:{params.RGPL}\\tPM:{params.RGPM}\\tSM:{params.RGSM}" {input.reference} {input.fastq_trimmed} > {output.sam}
-            
-            # Convert SAM to BAM
-            samtools view -Sb {output.sam} > {output.bam}
-            
-            # Sort the BAM file
-            samtools sort {output.bam} -o {output.sorted_bam}
-
-            # Index the sorted BAM file
-            samtools index {output.sorted_bam}
             """
 
 
-# Rule to run GATK HaplotypeCaller on sorted BAM files for variant calling
+# Align trimmed FASTQ files using BWA for each weekly run
+for weekly_run in range(1, config["weekly_runs"] + 1):
+    for sample in range(1, config["nsamples"] + 1):
+        rule:
+            input:
+                # Reference genome file and paired-end FASTQ files (R1 and R2)
+                reference=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta",
+                
+                # Expand file paths for demultiplexed FASTQ files (R1, R2) for each sample
+                fastq_demu=expand("data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/genome_{weekly_run}_Ind{sample}_{read}_demultiplexed.fastq", weekly_run=weekly_run, sample=sample, read=["R1", "R2"])
+            output:
+                # Output SAM, BAM, sorted BAM, and BAM index files
+                sam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/aligned_genome_{sample}.sam",
+                bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/aligned_genome_{sample}.bam",
+                sorted_bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/sorted_aligned_genome_{sample}.bam",
+                metrics=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/dedup_metrics.txt",
+                dedup_sorted_bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/dedup_sorted_aligned_genome_{sample}.bam",
+                index_bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/dedup_sorted_aligned_genome_{sample}.bam.bai"
+            params:
+                # Parameters for each sample's read group in BWA
+                RGID=f"tsk_{sample}",  # Read group identifier
+                RGLB=f"tsk_{sample}",  # Library identifier
+                RGPL="ILLUMINA",       # Sequencing platform
+                RGPM="HISEQ",          # Platform model
+                RGSM=f"tsk_{sample}"   # Sample name
+            conda:
+                # Specify the Conda environment.
+                "envs/environment.yml"
+            threads: config["ncpus"]  # Number of threads for BWA
+            shell:
+                """
+                # Align FASTQ reads to the reference genome, output SAM file
+                bwa mem -M -R "@RG\\tID:{params.RGID}\\tLB:{params.RGLB}\\tPL:{params.RGPL}\\tPM:{params.RGPM}\\tSM:{params.RGSM}" {input.reference} {input.fastq_demu} > {output.sam}
+                
+                # Convert SAM to BAM
+                samtools view -Sb {output.sam} > {output.bam}
+
+                # Sort the BAM file
+                samtools sort {output.bam} -o {output.sorted_bam}
+                
+                picard MarkDuplicates I={output.sorted_bam} O={output.dedup_sorted_bam} M={output.metrics} REMOVE_DUPLICATES=true
+                
+                # Index the sorted BAM file
+                samtools index {output.dedup_sorted_bam}
+                """
+
+# Rule to run GATK HaplotypeCaller for variant calling on each sample across multiple weekly runs.
+for weekly_run in range(1, config["weekly_runs"] + 1):
+    for sample in range(1, config["nsamples"] + 1):
+        rule:
+            input:
+                # Reference genome and sorted BAM file for the current sample.
+                reference=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta",
+                bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/dedup_sorted_aligned_genome_{sample}.bam",
+                index_bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/dedup_sorted_aligned_genome_{sample}.bam.bai"
+            output:
+                # Output VCF file with variants for the current sample.
+                vcf=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/sample_{weekly_run}_{sample}.g.vcf"
+            conda:
+                # Specify the Conda environment.
+                "envs/environment.yml"
+            threads: config["ncpus"]  # Number of threads for GATK.
+            shell:
+                """
+                gatk HaplotypeCaller --reference {input.reference} --input {input.bam} --output {output.vcf} -ERC GVCF
+                """
+
+
+# Rule to combine GVCFs and run GATK GenotypeGVCFs for variant calling on combined genomes
 for weekly_run in range(1, config["weekly_runs"] + 1):
     rule:
         input:
-            # Reference genome and sorted BAM file from the previous step
+            # Reference genome file for the current run
             reference=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta",
-            bam=f"data/genome-simulations/genomes_{weekly_run}/aligned_genome/sorted_aligned_genome_{weekly_run}.bam",
+            # Index BAM file for validation
+            index_bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_1/dedup_sorted_aligned_genome_1.bam.bai"
         output:
-            # GATK output: VCF file containing variants
-            vcf=f"data/genome-simulations/genomes_{weekly_run}/gatk/genome_{weekly_run}.vcf"
+            # Combined VCF file from multiple GVCFs
+            comb_vcf=f"data/genome-simulations/genomes_{weekly_run}/gatk/combined_genomes_run_{weekly_run}.g.vcf",
+            # Final processed VCF file
+            final_vcf=f"data/fully-processed-data/genomes_fully_processed_run_{weekly_run}.vcf"
+        params:
+            # Weekly run iteration for file paths
+            weekly_run=weekly_run
         conda:
-            # Use GATK in Conda environment
+            # Specify the Conda environment.
             "envs/environment.yml"
-        threads: config["ncpus"]  # Set number of threads for GATK
+        threads: config["ncpus"]  # Number of threads for GATK
         shell:
             """
-            # Run GATK HaplotypeCaller for variant calling
-            gatk HaplotypeCaller --reference {input.reference} --input {input.bam} --output {output.vcf}
+            # Collect all GVCF files for the current run
+            bam_files=$(find data/genome-simulations/genomes_{params.weekly_run}/demultiplexed -type f -name "*g.vcf" | sed 's/^/--variant /')
+            
+            # Combine GVCF files into a single VCF
+            gatk CombineGVCFs --reference {input.reference} $bam_files --output {output.comb_vcf}
+            
+            # Genotype the combined VCF
+            gatk GenotypeGVCFs --reference {input.reference} --variant {output.comb_vcf} --output {output.final_vcf}
             """

@@ -1,0 +1,51 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+16           1
+17           1
+all          1
+total        3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 12:20:04 2024]
+localrule 17:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R2_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R2_demultiplexed.fastq
+    output: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_2/fasta/reference_genome_2.dict, data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.sam, data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.sam, data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.bam, data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.bam, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam.bai, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam.bai
+    jobid: 16
+    reason: Missing output files: data/genome-simulations/genomes_2/fasta/reference_genome_2.dict, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam.bai, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam.bai, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+RuleException in rule 17 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 263:
+NameError: The name 'sample' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}, when formatting the following:
+
+            # Index the reference genome
+            bwa index {input.reference}
+
+            # Generate the FASTA index (.fai) file using samtools faidx
+            samtools faidx {input.reference}
+
+            # Generate the sequence dictionary (.dict) file using Picard
+            picard CreateSequenceDictionary R={input.reference} O={output.dicti}
+
+            # Loop over each sample and align reads
+            for sample in $(seq 1 {params.RGSM}); do
+                # Align the demultiplexed FASTQ reads to the reference genome and output SAM file
+                bwa mem -M -R "@RG\tID:{params.RGID}\tLB:{params.RGLB}\tPL:{params.RGPL}\tPM:{params.RGPM}\tSM:$sample" {input.reference}                 data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_${sample}/genome_{weekly_run}_Ind${sample}_R1_demultiplexed.fastq                 data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_${sample}/genome_{weekly_run}_Ind${sample}_R2_demultiplexed.fastq > {output.sam[sample-1]}
+
+                # Convert SAM to BAM
+                samtools view -Sb {output.sam[sample-1]} > {output.bam[sample-1]}
+
+                # Sort the BAM file
+                samtools sort {output.bam[sample-1]} -o {output.sorted_bam[sample-1]}
+
+                # Index the sorted BAM file
+                samtools index {output.sorted_bam[sample-1]}
+            done
+            

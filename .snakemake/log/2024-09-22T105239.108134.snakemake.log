@@ -1,0 +1,53 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+11           1
+12           1
+13           1
+14           1
+15           1
+8            1
+9            1
+all          1
+total        8
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 10:52:39 2024]
+localrule 14:
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq, data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R2_trimmed.fastq
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.fai, data/genome-simulations/genomes_1/fasta/reference_genome_1.dict
+    jobid: 13
+    reason: Missing output files: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.fai, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.dict; Code has changed since last execution; Params have changed since last execution; Software environment definition has changed since last execution
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+RuleException in rule 14 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 219:
+AttributeError: 'OutputFiles' object has no attribute 'sam', when formatting the following:
+
+            # Index the reference genome
+            bwa index {input.reference}
+            
+            # Generate the FASTA index (.fai) file using samtools faidx
+            samtools faidx {input.reference}
+            
+            # Generate the sequence dictionary (.dict) file using Picard
+            picard CreateSequenceDictionary R={input.reference} O={output.dicti}
+            
+            # Align the trimmed FASTQ reads to the reference genome and output SAM file
+            #bwa mem -M -R "@RG\tID:{params.RGID}\tLB:{params.RGLB}\tPL:{params.RGPL}\tPM:{params.RGPM}\tSM:{params.RGSM}" {input.reference} {input.fastq_trimmed} > {output.sam}
+            
+            # Convert SAM to BAM
+            #samtools view -Sb {output.sam} > {output.bam}
+            
+            # Sort the BAM file
+            #samtools sort {output.bam} -o {output.sorted_bam}
+
+            # Index the sorted BAM file
+            #samtools index {output.sorted_bam}
+            

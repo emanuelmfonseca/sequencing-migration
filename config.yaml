@@ -7,7 +7,7 @@ working_directory: "/Users/emanuelmfonseca/project/sequencing-migration"
 weekly_runs: 2
 
 # number of CPUs available for analysis
-ncpus: 2
+ncpus: 4
 
 # Parameters for the simulations
 nref: 1e4         # Effective population size in the past

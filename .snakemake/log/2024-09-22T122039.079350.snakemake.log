@@ -1,0 +1,66 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+16           1
+17           1
+all          1
+total        3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 12:20:39 2024]
+localrule 17:
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R2_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R2_demultiplexed.fastq
+    output: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_2/fasta/reference_genome_2.dict, data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.sam, data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.sam, data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.bam, data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.bam, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam.bai, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam.bai
+    jobid: 16
+    reason: Missing output files: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam.bai, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam.bai, data/genome-simulations/genomes_2/fasta/reference_genome_2.dict, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 12:20:39 2024]
+Error in rule 17:
+    jobid: 16
+    input: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R2_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R1_demultiplexed.fastq, data/genome-simulations/genomes_2/demultiplexed/sample_2/genome_2_Ind2_R2_demultiplexed.fastq
+    output: data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_2/fasta/reference_genome_2.dict, data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.sam, data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.sam, data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.bam, data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.bam, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam, data/genome-simulations/genomes_2/demultiplexed/sample_1/sorted_aligned_genome_2_Ind1.bam.bai, data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam.bai
+    conda-env: /Users/emanuelmfonseca/project/sequencing-migration/.snakemake/conda/35420d6d323181dffcd0642cc29ad476_
+    shell:
+        
+            # Index the reference genome
+            bwa index data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta
+            
+            # Generate the FASTA index (.fai) file using samtools faidx
+            samtools faidx data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta
+            
+            # Generate the sequence dictionary (.dict) file using Picard
+            picard CreateSequenceDictionary R=data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta O=data/genome-simulations/genomes_2/fasta/reference_genome_2.dict
+            
+            # Loop over each sample to align demultiplexed FASTQ reads and process SAM/BAM files
+            for sample in 2
+            do
+                # Align the demultiplexed FASTQ reads to the reference genome and output SAM file
+                bwa mem -M -R "@RG\tID:tsk_2\tLB:tsk_2\tPL:ILLUMINA\tPM:HISEQ\tSM:tsk_2" data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R1_demultiplexed.fastq data/genome-simulations/genomes_2/demultiplexed/sample_1/genome_2_Ind1_R2_demultiplexed.fastq > data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.sam data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.sam
+            done
+                
+            # Convert SAM to BAM
+            samtools view -Sb data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.sam > data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.bam
+                
+            # Sort the BAM file
+            samtools sort data/genome-simulations/genomes_2/demultiplexed/sample_2/aligned_genome_2_Ind2.bam -o data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam
+
+            # Index the sorted BAM file
+            samtools index data/genome-simulations/genomes_2/demultiplexed/sample_2/sorted_aligned_genome_2_Ind2.bam
+            
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job 17 since they might be corrupted:
+data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.amb, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.ann, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.bwt, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.pac, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.sa, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta.fai, data/genome-simulations/genomes_2/fasta/reference_genome_2.dict, data/genome-simulations/genomes_2/demultiplexed/sample_1/aligned_genome_2_Ind1.sam
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-22T122039.079350.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

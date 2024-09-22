@@ -1,0 +1,124 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                count
+---------------  -------
+10                     1
+11                     1
+12                     1
+13                     1
+14                     1
+15                     1
+16                     1
+17                     1
+18                     1
+19                     1
+20                     1
+21                     1
+4                      1
+5                      1
+6                      1
+7                      1
+8                      1
+9                      1
+all                    1
+generate_genome        1
+generate_snps          1
+total                 21
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 14:43:50 2024]
+localrule generate_snps:
+    input: /Users/emanuelmfonseca/project/sequencing-migration/scripts/demographic-simulation.py
+    output: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt
+    jobid: 5
+    reason: Missing output files: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 14:43:52 2024]
+Finished job 5.
+1 of 21 steps (5%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 14:43:52 2024]
+localrule generate_genome:
+    input: data/demographic-simulations/snp-matrix_1.txt, data/demographic-simulations/snp-matrix_2.txt, /Users/emanuelmfonseca/project/sequencing-migration/scripts/genome-simulation.py, /Users/emanuelmfonseca/project/sequencing-migration
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta
+    jobid: 4
+    reason: Missing output files: data/genome-simulations/genomes_2/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta, data/genome-simulations/genomes_2/fasta/individual_genome_2.fasta; Input files updated by another job: data/demographic-simulations/snp-matrix_2.txt, data/demographic-simulations/snp-matrix_1.txt
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 14:43:53 2024]
+Finished job 4.
+2 of 21 steps (10%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 14:43:53 2024]
+localrule 4:
+    input: data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta
+    output: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta
+    jobid: 3
+    reason: Missing output files: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta; Input files updated by another job: data/genome-simulations/genomes_1/fasta/individual_genome_2.fasta, data/genome-simulations/genomes_1/fasta/individual_genome_1.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 14:43:53 2024]
+Finished job 3.
+3 of 21 steps (14%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 14:43:53 2024]
+localrule 6:
+    input: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta
+    output: data/genome-simulations/genomes_1/fastq/genome_1_R1.fastq, data/genome-simulations/genomes_1/fastq/genome_1_R2.fastq
+    jobid: 2
+    reason: Missing output files: data/genome-simulations/genomes_1/fastq/genome_1_R1.fastq, data/genome-simulations/genomes_1/fastq/genome_1_R2.fastq; Input files updated by another job: data/genome-simulations/genomes_1/multifasta/multifasta_genome_1.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 14:43:55 2024]
+Finished job 2.
+4 of 21 steps (19%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Sep 22 14:43:55 2024]
+localrule 16:
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.fai, data/genome-simulations/genomes_1/fasta/reference_genome_1.dict
+    jobid: 15
+    reason: Missing output files: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.dict, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.fai, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb; Input files updated by another job: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta
+    resources: tmpdir=/var/folders/vr/dm12jytd28d0_z61hq3l47n40000gp/T
+
+[Sun Sep 22 14:43:55 2024]
+Error in rule 16:
+    jobid: 15
+    input: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta
+    output: data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.fai, data/genome-simulations/genomes_1/fasta/reference_genome_1.dict
+    conda-env: /Users/emanuelmfonseca/project/sequencing-migration/.snakemake/conda/35420d6d323181dffcd0642cc29ad476_
+    shell:
+        
+            # Index the reference genome
+            bwa index data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta
+            
+            # Generate the FASTA index (.fai) file using samtools faidx
+            samtools faidx data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta
+            
+            # Generate the sequence dictionary (.dict) file using Picard
+            picard CreateSequenceDictionary R=data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta O=data/genome-simulations/genomes_1/fasta/reference_genome_1.dict
+            
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job 16 since they might be corrupted:
+data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.amb, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.ann, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.bwt, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.pac, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.sa, data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta.fai
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-22T144350.456691.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

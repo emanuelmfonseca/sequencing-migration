@@ -1,0 +1,617 @@
+##fileformat=VCFv4.2
+##ALT=<ID=NON_REF,Description="Represents any possible alternative allele not already represented at this location by REF and ALT">
+##FILTER=<ID=LowQual,Description="Low quality">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth (reads with MQ=255 or with bad mates are filtered)">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=MIN_DP,Number=1,Type=Integer,Description="Minimum DP observed within the GVCF block">
+##FORMAT=<ID=PGT,Number=1,Type=String,Description="Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles">
+##FORMAT=<ID=PID,Number=1,Type=String,Description="Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
+##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
+##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
+##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output data/genome-simulations/genomes_2/demultiplexed/sample_1/sample_2_1.g.vcf --input data/genome-simulations/genomes_2/demultiplexed/sample_1/dedup_sorted_aligned_genome_1.bam --reference data/genome-simulations/genomes_2/fasta/reference_genome_2.fasta --use-posteriors-to-calculate-qual false --dont-use-dragstr-priors false --use-new-qual-calculator true --annotate-with-num-discovered-alleles false --heterozygosity 0.001 --indel-heterozygosity 1.25E-4 --heterozygosity-stdev 0.01 --standard-min-confidence-threshold-for-calling 30.0 --max-alternate-alleles 6 --max-genotype-count 1024 --sample-ploidy 2 --num-reference-samples-if-no-call 0 --genotype-assignment-method USE_PLS_TO_ASSIGN --contamination-fraction-to-filter 0.0 --output-mode EMIT_VARIANTS_ONLY --all-site-pls false --flow-likelihood-parallel-threads 0 --flow-likelihood-optimized-comp false --trim-to-haplotype true --exact-matching false --flow-use-t0-tag false --flow-probability-threshold 0.003 --flow-remove-non-single-base-pair-indels false --flow-remove-one-zero-probs false --flow-quantization-bins 121 --flow-fill-empty-bins-value 0.001 --flow-symmetric-indel-probs false --flow-report-insertion-or-deletion false --flow-disallow-probs-larger-than-call false --flow-lump-probs false --flow-retain-max-n-probs-base-format false --flow-probability-scaling-factor 10 --flow-order-cycle-length 4 --keep-boundary-flows false --gvcf-gq-bands 1 --gvcf-gq-bands 2 --gvcf-gq-bands 3 --gvcf-gq-bands 4 --gvcf-gq-bands 5 --gvcf-gq-bands 6 --gvcf-gq-bands 7 --gvcf-gq-bands 8 --gvcf-gq-bands 9 --gvcf-gq-bands 10 --gvcf-gq-bands 11 --gvcf-gq-bands 12 --gvcf-gq-bands 13 --gvcf-gq-bands 14 --gvcf-gq-bands 15 --gvcf-gq-bands 16 --gvcf-gq-bands 17 --gvcf-gq-bands 18 --gvcf-gq-bands 19 --gvcf-gq-bands 20 --gvcf-gq-bands 21 --gvcf-gq-bands 22 --gvcf-gq-bands 23 --gvcf-gq-bands 24 --gvcf-gq-bands 25 --gvcf-gq-bands 26 --gvcf-gq-bands 27 --gvcf-gq-bands 28 --gvcf-gq-bands 29 --gvcf-gq-bands 30 --gvcf-gq-bands 31 --gvcf-gq-bands 32 --gvcf-gq-bands 33 --gvcf-gq-bands 34 --gvcf-gq-bands 35 --gvcf-gq-bands 36 --gvcf-gq-bands 37 --gvcf-gq-bands 38 --gvcf-gq-bands 39 --gvcf-gq-bands 40 --gvcf-gq-bands 41 --gvcf-gq-bands 42 --gvcf-gq-bands 43 --gvcf-gq-bands 44 --gvcf-gq-bands 45 --gvcf-gq-bands 46 --gvcf-gq-bands 47 --gvcf-gq-bands 48 --gvcf-gq-bands 49 --gvcf-gq-bands 50 --gvcf-gq-bands 51 --gvcf-gq-bands 52 --gvcf-gq-bands 53 --gvcf-gq-bands 54 --gvcf-gq-bands 55 --gvcf-gq-bands 56 --gvcf-gq-bands 57 --gvcf-gq-bands 58 --gvcf-gq-bands 59 --gvcf-gq-bands 60 --gvcf-gq-bands 70 --gvcf-gq-bands 80 --gvcf-gq-bands 90 --gvcf-gq-bands 99 --floor-blocks false --indel-size-to-eliminate-in-ref-model 10 --disable-optimizations false --dragen-mode false --dragen-378-concordance-mode false --flow-mode NONE --apply-bqd false --apply-frd false --disable-spanning-event-genotyping false --transform-dragen-mapping-quality false --mapping-quality-threshold-for-genotyping 20 --max-effective-depth-adjustment-for-frd 0 --just-determine-active-regions false --dont-genotype false --do-not-run-physical-phasing false --do-not-correct-overlapping-quality false --use-filtered-reads-for-annotations false --use-flow-aligner-for-stepwise-hc-filtering false --adaptive-pruning false --do-not-recover-dangling-branches false --recover-dangling-heads false --kmer-size 10 --kmer-size 25 --dont-increase-kmer-sizes-for-cycles false --allow-non-unique-kmers-in-ref false --num-pruning-samples 1 --min-dangling-branch-length 4 --recover-all-dangling-branches false --max-num-haplotypes-in-population 128 --min-pruning 2 --adaptive-pruning-initial-error-rate 0.001 --pruning-lod-threshold 2.302585092994046 --pruning-seeding-lod-threshold 9.210340371976184 --max-unpruned-variants 100 --linked-de-bruijn-graph false --disable-artificial-haplotype-recovery false --enable-legacy-graph-cycle-detection false --debug-assembly false --debug-graph-transformations false --capture-assembly-failure-bam false --num-matching-bases-in-dangling-end-to-recover -1 --error-correction-log-odds -Infinity --error-correct-reads false --kmer-length-for-read-error-correction 25 --min-observations-for-kmer-to-be-solid 20 --likelihood-calculation-engine PairHMM --base-quality-score-threshold 18 --dragstr-het-hom-ratio 2 --dont-use-dragstr-pair-hmm-scores false --pair-hmm-gap-continuation-penalty 10 --expected-mismatch-rate-for-read-disqualification 0.02 --pair-hmm-implementation FASTEST_AVAILABLE --pcr-indel-model CONSERVATIVE --phred-scaled-global-read-mismapping-rate 45 --disable-symmetric-hmm-normalizing false --disable-cap-base-qualities-to-map-quality false --enable-dynamic-read-disqualification-for-genotyping false --dynamic-read-disqualification-threshold 1.0 --native-pair-hmm-threads 4 --native-pair-hmm-use-double-precision false --flow-hmm-engine-min-indel-adjust 6 --flow-hmm-engine-flat-insertion-penatly 45 --flow-hmm-engine-flat-deletion-penatly 45 --pileup-detection false --use-pdhmm false --use-pdhmm-overlap-optimization false --make-determined-haps-from-pd-code false --print-pileupcalling-status false --fallback-gga-if-pdhmm-fails true --pileup-detection-enable-indel-pileup-calling false --pileup-detection-active-region-phred-threshold 0.0 --num-artificial-haplotypes-to-add-per-allele 5 --artifical-haplotype-filtering-kmer-size 10 --pileup-detection-snp-alt-threshold 0.1 --pileup-detection-indel-alt-threshold 0.1 --pileup-detection-absolute-alt-depth 0.0 --pileup-detection-snp-adjacent-to-assembled-indel-range 5 --pileup-detection-snp-basequality-filter 12 --pileup-detection-bad-read-tolerance 0.0 --pileup-detection-proper-pair-read-badness true --pileup-detection-edit-distance-read-badness-threshold 0.08 --pileup-detection-chimeric-read-badness true --pileup-detection-template-mean-badness-threshold 0.0 --pileup-detection-template-std-badness-threshold 0.0 --pileup-detection-filter-assembly-alt-bad-read-tolerance 0.0 --pileup-detection-edit-distance-read-badness-for-assembly-filtering-threshold 0.12 --bam-writer-type CALLED_HAPLOTYPES --dont-use-soft-clipped-bases false --override-fragment-softclip-check false --min-base-quality-score 10 --smith-waterman FASTEST_AVAILABLE --max-mnp-distance 0 --force-call-filtered-alleles false --reference-model-deletion-quality 30 --soft-clip-low-quality-ends false --allele-informative-reads-overlap-margin 2 --smith-waterman-dangling-end-match-value 25 --smith-waterman-dangling-end-mismatch-penalty -50 --smith-waterman-dangling-end-gap-open-penalty -110 --smith-waterman-dangling-end-gap-extend-penalty -6 --smith-waterman-haplotype-to-reference-match-value 200 --smith-waterman-haplotype-to-reference-mismatch-penalty -150 --smith-waterman-haplotype-to-reference-gap-open-penalty -260 --smith-waterman-haplotype-to-reference-gap-extend-penalty -11 --smith-waterman-read-to-haplotype-match-value 10 --smith-waterman-read-to-haplotype-mismatch-penalty -15 --smith-waterman-read-to-haplotype-gap-open-penalty -30 --smith-waterman-read-to-haplotype-gap-extend-penalty -5 --flow-assembly-collapse-hmer-size 0 --flow-assembly-collapse-partial-mode false --flow-filter-alleles false --flow-filter-alleles-qual-threshold 30.0 --flow-filter-alleles-sor-threshold 3.0 --flow-filter-lone-alleles false --flow-filter-alleles-debug-graphs false --min-assembly-region-size 50 --max-assembly-region-size 300 --active-probability-threshold 0.002 --max-prob-propagation-distance 50 --force-active false --assembly-region-padding 100 --padding-around-indels 75 --padding-around-snps 20 --padding-around-strs 75 --max-extension-into-assembly-region-padding-legacy 25 --max-reads-per-alignment-start 50 --enable-legacy-assembly-region-trimming false --interval-set-rule UNION --interval-padding 0 --interval-exclusion-padding 0 --interval-merging-rule ALL --read-validation-stringency SILENT --seconds-between-progress-updates 10.0 --disable-sequence-dictionary-validation false --create-output-bam-index true --create-output-bam-md5 false --create-output-variant-index true --create-output-variant-md5 false --max-variants-per-shard 0 --lenient false --add-output-sam-program-record true --add-output-vcf-command-line true --cloud-prefetch-buffer 40 --cloud-index-prefetch-buffer -1 --disable-bam-index-caching false --sites-only-vcf-output false --help false --version false --showHidden false --verbosity INFO --QUIET false --use-jdk-deflater false --use-jdk-inflater false --gcs-max-retries 20 --gcs-project-for-requester-pays  --disable-tool-default-read-filters false --minimum-mapping-quality 20 --disable-tool-default-annotations false --enable-all-annotations false --allow-old-rms-mapping-quality-annotation-data false",Version="4.5.0.0",Date="September 22, 2024 at 5:18:14 PM BRT">
+##GVCFBlock0-1=minGQ=0(inclusive),maxGQ=1(exclusive)
+##GVCFBlock1-2=minGQ=1(inclusive),maxGQ=2(exclusive)
+##GVCFBlock10-11=minGQ=10(inclusive),maxGQ=11(exclusive)
+##GVCFBlock11-12=minGQ=11(inclusive),maxGQ=12(exclusive)
+##GVCFBlock12-13=minGQ=12(inclusive),maxGQ=13(exclusive)
+##GVCFBlock13-14=minGQ=13(inclusive),maxGQ=14(exclusive)
+##GVCFBlock14-15=minGQ=14(inclusive),maxGQ=15(exclusive)
+##GVCFBlock15-16=minGQ=15(inclusive),maxGQ=16(exclusive)
+##GVCFBlock16-17=minGQ=16(inclusive),maxGQ=17(exclusive)
+##GVCFBlock17-18=minGQ=17(inclusive),maxGQ=18(exclusive)
+##GVCFBlock18-19=minGQ=18(inclusive),maxGQ=19(exclusive)
+##GVCFBlock19-20=minGQ=19(inclusive),maxGQ=20(exclusive)
+##GVCFBlock2-3=minGQ=2(inclusive),maxGQ=3(exclusive)
+##GVCFBlock20-21=minGQ=20(inclusive),maxGQ=21(exclusive)
+##GVCFBlock21-22=minGQ=21(inclusive),maxGQ=22(exclusive)
+##GVCFBlock22-23=minGQ=22(inclusive),maxGQ=23(exclusive)
+##GVCFBlock23-24=minGQ=23(inclusive),maxGQ=24(exclusive)
+##GVCFBlock24-25=minGQ=24(inclusive),maxGQ=25(exclusive)
+##GVCFBlock25-26=minGQ=25(inclusive),maxGQ=26(exclusive)
+##GVCFBlock26-27=minGQ=26(inclusive),maxGQ=27(exclusive)
+##GVCFBlock27-28=minGQ=27(inclusive),maxGQ=28(exclusive)
+##GVCFBlock28-29=minGQ=28(inclusive),maxGQ=29(exclusive)
+##GVCFBlock29-30=minGQ=29(inclusive),maxGQ=30(exclusive)
+##GVCFBlock3-4=minGQ=3(inclusive),maxGQ=4(exclusive)
+##GVCFBlock30-31=minGQ=30(inclusive),maxGQ=31(exclusive)
+##GVCFBlock31-32=minGQ=31(inclusive),maxGQ=32(exclusive)
+##GVCFBlock32-33=minGQ=32(inclusive),maxGQ=33(exclusive)
+##GVCFBlock33-34=minGQ=33(inclusive),maxGQ=34(exclusive)
+##GVCFBlock34-35=minGQ=34(inclusive),maxGQ=35(exclusive)
+##GVCFBlock35-36=minGQ=35(inclusive),maxGQ=36(exclusive)
+##GVCFBlock36-37=minGQ=36(inclusive),maxGQ=37(exclusive)
+##GVCFBlock37-38=minGQ=37(inclusive),maxGQ=38(exclusive)
+##GVCFBlock38-39=minGQ=38(inclusive),maxGQ=39(exclusive)
+##GVCFBlock39-40=minGQ=39(inclusive),maxGQ=40(exclusive)
+##GVCFBlock4-5=minGQ=4(inclusive),maxGQ=5(exclusive)
+##GVCFBlock40-41=minGQ=40(inclusive),maxGQ=41(exclusive)
+##GVCFBlock41-42=minGQ=41(inclusive),maxGQ=42(exclusive)
+##GVCFBlock42-43=minGQ=42(inclusive),maxGQ=43(exclusive)
+##GVCFBlock43-44=minGQ=43(inclusive),maxGQ=44(exclusive)
+##GVCFBlock44-45=minGQ=44(inclusive),maxGQ=45(exclusive)
+##GVCFBlock45-46=minGQ=45(inclusive),maxGQ=46(exclusive)
+##GVCFBlock46-47=minGQ=46(inclusive),maxGQ=47(exclusive)
+##GVCFBlock47-48=minGQ=47(inclusive),maxGQ=48(exclusive)
+##GVCFBlock48-49=minGQ=48(inclusive),maxGQ=49(exclusive)
+##GVCFBlock49-50=minGQ=49(inclusive),maxGQ=50(exclusive)
+##GVCFBlock5-6=minGQ=5(inclusive),maxGQ=6(exclusive)
+##GVCFBlock50-51=minGQ=50(inclusive),maxGQ=51(exclusive)
+##GVCFBlock51-52=minGQ=51(inclusive),maxGQ=52(exclusive)
+##GVCFBlock52-53=minGQ=52(inclusive),maxGQ=53(exclusive)
+##GVCFBlock53-54=minGQ=53(inclusive),maxGQ=54(exclusive)
+##GVCFBlock54-55=minGQ=54(inclusive),maxGQ=55(exclusive)
+##GVCFBlock55-56=minGQ=55(inclusive),maxGQ=56(exclusive)
+##GVCFBlock56-57=minGQ=56(inclusive),maxGQ=57(exclusive)
+##GVCFBlock57-58=minGQ=57(inclusive),maxGQ=58(exclusive)
+##GVCFBlock58-59=minGQ=58(inclusive),maxGQ=59(exclusive)
+##GVCFBlock59-60=minGQ=59(inclusive),maxGQ=60(exclusive)
+##GVCFBlock6-7=minGQ=6(inclusive),maxGQ=7(exclusive)
+##GVCFBlock60-70=minGQ=60(inclusive),maxGQ=70(exclusive)
+##GVCFBlock7-8=minGQ=7(inclusive),maxGQ=8(exclusive)
+##GVCFBlock70-80=minGQ=70(inclusive),maxGQ=80(exclusive)
+##GVCFBlock8-9=minGQ=8(inclusive),maxGQ=9(exclusive)
+##GVCFBlock80-90=minGQ=80(inclusive),maxGQ=90(exclusive)
+##GVCFBlock9-10=minGQ=9(inclusive),maxGQ=10(exclusive)
+##GVCFBlock90-99=minGQ=90(inclusive),maxGQ=99(exclusive)
+##GVCFBlock99-100=minGQ=99(inclusive),maxGQ=100(exclusive)
+##INFO=<ID=BaseQRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered">
+##INFO=<ID=END,Number=1,Type=Integer,Description="Stop position of the interval">
+##INFO=<ID=ExcessHet,Number=1,Type=Float,Description="Phred-scaled p-value for exact test of excess heterozygosity">
+##INFO=<ID=InbreedingCoeff,Number=1,Type=Float,Description="Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation">
+##INFO=<ID=MLEAC,Number=A,Type=Integer,Description="Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed">
+##INFO=<ID=MLEAF,Number=A,Type=Float,Description="Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed">
+##INFO=<ID=MQRankSum,Number=1,Type=Float,Description="Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities">
+##INFO=<ID=RAW_MQandDP,Number=2,Type=Integer,Description="Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation.">
+##INFO=<ID=ReadPosRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias">
+##contig=<ID=Reference,length=100245>
+##source=HaplotypeCaller
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	tsk_1
+Reference	1	.	C	<NON_REF>	.	.	END=486	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	487	.	A	<NON_REF>	.	.	END=602	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	603	.	A	<NON_REF>	.	.	END=1343	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	1344	.	G	<NON_REF>	.	.	END=1458	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	1459	.	C	<NON_REF>	.	.	END=5503	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	5504	.	C	<NON_REF>	.	.	END=5617	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	5618	.	C	<NON_REF>	.	.	END=6289	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	6290	.	C	<NON_REF>	.	.	END=6315	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	6316	.	T	<NON_REF>	.	.	END=6318	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,76
+Reference	6319	.	G	<NON_REF>	.	.	END=6319	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,4
+Reference	6320	.	A	<NON_REF>	.	.	END=6350	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	6351	.	A	<NON_REF>	.	.	END=6399	GT:DP:GQ:MIN_DP:PL	0/0:3:9:3:0,9,102
+Reference	6400	.	T	<NON_REF>	.	.	END=6400	GT:DP:GQ:MIN_DP:PL	0/0:3:0:3:0,0,65
+Reference	6401	.	G	<NON_REF>	.	.	END=6404	GT:DP:GQ:MIN_DP:PL	0/0:3:9:3:0,9,115
+Reference	6405	.	A	<NON_REF>	.	.	END=6431	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	6432	.	T	<NON_REF>	.	.	END=6466	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	6467	.	G	<NON_REF>	.	.	END=6883	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	6884	.	C	<NON_REF>	.	.	END=6995	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	6996	.	G	<NON_REF>	.	.	END=6998	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,84
+Reference	6999	.	C	<NON_REF>	.	.	END=7110	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	7111	.	G	<NON_REF>	.	.	END=10205	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	10206	.	C	<NON_REF>	.	.	END=10251	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	10252	.	C	<NON_REF>	.	.	END=10320	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	10321	.	G	<NON_REF>	.	.	END=10367	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	10368	.	C	<NON_REF>	.	.	END=10949	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	10950	.	T	<NON_REF>	.	.	END=11065	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	11066	.	A	<NON_REF>	.	.	END=11083	GT:DP:GQ:MIN_DP:PL	0/0:1:0:0:0,0,0
+Reference	11084	.	G	<NON_REF>	.	.	END=11199	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	11200	.	T	<NON_REF>	.	.	END=12679	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	12680	.	C	<NON_REF>	.	.	END=12795	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	12796	.	T	<NON_REF>	.	.	END=13270	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	13271	.	A	<NON_REF>	.	.	END=13386	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	13387	.	G	<NON_REF>	.	.	END=13474	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	13475	.	C	<NON_REF>	.	.	END=13590	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	13591	.	C	<NON_REF>	.	.	END=14008	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	14009	.	G	<NON_REF>	.	.	END=14122	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	14123	.	G	<NON_REF>	.	.	END=14123	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,80
+Reference	14124	.	C	<NON_REF>	.	.	END=14238	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	14239	.	G	<NON_REF>	.	.	END=14605	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	14606	.	T	<NON_REF>	.	.	END=14721	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	14722	.	A	<NON_REF>	.	.	END=14835	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	14836	.	C	<NON_REF>	.	.	END=14949	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	14950	.	C	<NON_REF>	.	.	END=15015	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	15016	.	T	<NON_REF>	.	.	END=15095	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	15096	.	C	<NON_REF>	.	.	END=15129	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	15130	.	C	<NON_REF>	.	.	END=15134	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	15135	.	G	<NON_REF>	.	.	END=15255	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	15256	.	T	<NON_REF>	.	.	END=15318	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	15319	.	G	<NON_REF>	.	.	END=15319	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	15320	.	G	<NON_REF>	.	.	END=15350	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	15351	.	A	<NON_REF>	.	.	END=15371	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	15372	.	G	<NON_REF>	.	.	END=15409	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	15410	.	C	<NON_REF>	.	.	END=15466	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	15467	.	T	<NON_REF>	.	.	END=15490	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	15491	.	C	<NON_REF>	.	.	END=15525	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	15526	.	A	<NON_REF>	.	.	END=15605	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	15606	.	C	<NON_REF>	.	.	END=16193	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	16194	.	G	<NON_REF>	.	.	END=16243	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	16244	.	C	<NON_REF>	.	.	END=16308	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	16309	.	C	<NON_REF>	.	.	END=16357	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	16358	.	G	<NON_REF>	.	.	END=16647	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	16648	.	C	<NON_REF>	.	.	END=16692	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	16693	.	G	<NON_REF>	.	.	END=16693	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	16694	.	A	<NON_REF>	.	.	END=16763	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	16764	.	G	<NON_REF>	.	.	END=18018	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	18019	.	C	<NON_REF>	.	.	END=18131	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	18132	.	C	<NON_REF>	.	.	END=18356	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	18357	.	A	<NON_REF>	.	.	END=18428	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	18429	.	C	<NON_REF>	.	.	END=18429	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	18430	.	A	<NON_REF>	.	.	END=18471	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	18472	.	T	<NON_REF>	.	.	END=18750	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	18751	.	A	<NON_REF>	.	.	END=18866	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	18867	.	C	<NON_REF>	.	.	END=19166	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	19167	.	A	<NON_REF>	.	.	END=19281	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	19282	.	T	<NON_REF>	.	.	END=19710	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	19711	.	C	<NON_REF>	.	.	END=19826	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	19827	.	C	<NON_REF>	.	.	END=19858	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	19859	.	T	<NON_REF>	.	.	END=19974	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	19975	.	G	<NON_REF>	.	.	END=20029	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	20030	.	A	<NON_REF>	.	.	END=20134	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	20135	.	A	<NON_REF>	.	.	END=20135	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	20136	.	A	<NON_REF>	.	.	END=20144	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	20145	.	G	<NON_REF>	.	.	END=20145	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,80
+Reference	20146	.	G	<NON_REF>	.	.	END=20260	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	20261	.	T	<NON_REF>	.	.	END=20287	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	20288	.	C	<NON_REF>	.	.	END=20303	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	20304	.	A	<NON_REF>	.	.	END=20304	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	20305	.	G	<NON_REF>	.	.	END=20365	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	20366	.	G	<NON_REF>	.	.	END=20403	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,74
+Reference	20404	.	G	<NON_REF>	.	.	END=20407	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	20408	.	G	<NON_REF>	.	.	END=20479	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	20480	.	C	<NON_REF>	.	.	END=20523	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	20524	.	G	<NON_REF>	.	.	END=20654	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	20655	.	G	<NON_REF>	.	.	END=20770	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	20771	.	A	<NON_REF>	.	.	END=20960	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	20961	.	T	<NON_REF>	.	.	END=20965	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	20966	.	C	<NON_REF>	.	.	END=20966	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	20967	.	G	<NON_REF>	.	.	END=21058	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	21059	.	T	<NON_REF>	.	.	END=21074	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,50
+Reference	21075	.	C	<NON_REF>	.	.	END=21174	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	21175	.	T	<NON_REF>	.	.	END=21995	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	21996	.	C	<NON_REF>	.	.	END=22111	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	22112	.	T	<NON_REF>	.	.	END=22754	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	22755	.	T	<NON_REF>	.	.	END=22755	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	22756	.	G	<NON_REF>	.	.	END=22870	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	22871	.	C	<NON_REF>	.	.	END=22871	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	22872	.	G	<NON_REF>	.	.	END=23236	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	23237	.	C	<NON_REF>	.	.	END=23352	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	23353	.	C	<NON_REF>	.	.	END=25431	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	25432	.	A	<NON_REF>	.	.	END=25546	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	25547	.	C	<NON_REF>	.	.	END=25613	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	25614	.	A	<NON_REF>	.	.	END=25728	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	25729	.	A	<NON_REF>	.	.	END=25840	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	25841	.	T	<NON_REF>	.	.	END=25956	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	25957	.	C	<NON_REF>	.	.	END=26266	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	26267	.	C	<NON_REF>	.	.	END=26290	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,42
+Reference	26291	.	G	<NON_REF>	.	.	END=26351	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,50
+Reference	26352	.	G	<NON_REF>	.	.	END=26352	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,23
+Reference	26353	.	C	<NON_REF>	.	.	END=26358	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	26359	.	C	<NON_REF>	.	.	END=26382	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	26383	.	G	<NON_REF>	.	.	END=26657	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	26658	.	G	<NON_REF>	.	.	END=26773	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	26774	.	G	<NON_REF>	.	.	END=27595	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	27596	.	G	<NON_REF>	.	.	END=27709	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	27710	.	A	<NON_REF>	.	.	END=27827	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	27828	.	C	<NON_REF>	.	.	END=27941	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	27942	.	G	<NON_REF>	.	.	END=28081	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	28082	.	G	<NON_REF>	.	.	END=28196	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	28197	.	G	<NON_REF>	.	.	END=28385	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	28386	.	C	<NON_REF>	.	.	END=28412	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	28413	.	T	<NON_REF>	.	.	END=28413	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	28414	.	G	<NON_REF>	.	.	END=28455	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	28456	.	T	<NON_REF>	.	.	END=28456	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	28457	.	A	<NON_REF>	.	.	END=28536	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	28537	.	G	<NON_REF>	.	.	END=28572	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,59
+Reference	28573	.	G	<NON_REF>	.	.	END=28652	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	28653	.	G	<NON_REF>	.	.	END=28720	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	28721	.	A	<NON_REF>	.	.	END=28781	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	28782	.	T	<NON_REF>	.	.	END=28782	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	28783	.	G	<NON_REF>	.	.	END=28804	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	28805	.	T	<NON_REF>	.	.	END=28815	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	28816	.	G	<NON_REF>	.	.	END=28929	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	28930	.	A	<NON_REF>	.	.	END=29158	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	29159	.	A	<NON_REF>	.	.	END=29166	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	29167	.	A	<NON_REF>	.	.	END=29167	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	29168	.	G	<NON_REF>	.	.	END=29269	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	29270	.	G	<NON_REF>	.	.	END=29450	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	29451	.	C	<NON_REF>	.	.	END=29566	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	29567	.	C	<NON_REF>	.	.	END=29865	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	29866	.	T	<NON_REF>	.	.	END=29980	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	29981	.	C	<NON_REF>	.	.	END=30277	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	30278	.	T	<NON_REF>	.	.	END=30391	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	30392	.	T	<NON_REF>	.	.	END=30658	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	30659	.	G	<NON_REF>	.	.	END=30722	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	30723	.	C	<NON_REF>	.	.	END=30723	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	30724	.	G	<NON_REF>	.	.	END=30773	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	30774	.	C	<NON_REF>	.	.	END=31479	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	31480	.	T	<NON_REF>	.	.	END=31594	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	31595	.	T	<NON_REF>	.	.	END=31958	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	31959	.	G	<NON_REF>	.	.	END=32074	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	32075	.	C	<NON_REF>	.	.	END=32694	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	32695	.	G	<NON_REF>	.	.	END=32810	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	32811	.	A	<NON_REF>	.	.	END=34362	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	34363	.	A	<NON_REF>	.	.	END=34478	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	34479	.	C	<NON_REF>	.	.	END=34984	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	34985	.	C	<NON_REF>	.	.	END=35099	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	35100	.	A	<NON_REF>	.	.	END=35965	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	35966	.	A	<NON_REF>	.	.	END=36080	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	36081	.	G	<NON_REF>	.	.	END=36333	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	36334	.	T	<NON_REF>	.	.	END=36449	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	36450	.	C	<NON_REF>	.	.	END=37617	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	37618	.	C	<NON_REF>	.	.	END=37656	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	37657	.	A	<NON_REF>	.	.	END=37657	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	37658	.	G	<NON_REF>	.	.	END=37732	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	37733	.	C	<NON_REF>	.	.	END=38212	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	38213	.	G	<NON_REF>	.	.	END=38328	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	38329	.	C	<NON_REF>	.	.	END=38926	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	38927	.	G	<NON_REF>	.	.	END=38935	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	38936	.	G	<NON_REF>	.	.	END=39042	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	39043	.	G	<NON_REF>	.	.	END=39051	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	39052	.	C	<NON_REF>	.	.	END=39292	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	39293	.	G	<NON_REF>	.	.	END=39406	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	39407	.	C	<NON_REF>	.	.	END=39757	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	39758	.	G	<NON_REF>	.	.	END=39873	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	39874	.	T	<NON_REF>	.	.	END=39922	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	39923	.	C	<NON_REF>	.	.	END=40038	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	40039	.	C	<NON_REF>	.	.	END=40632	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	40633	.	A	<NON_REF>	.	.	END=40748	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	40749	.	C	<NON_REF>	.	.	END=41185	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	41186	.	G	<NON_REF>	.	.	END=41260	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	41261	.	G	<NON_REF>	.	.	END=41274	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	41275	.	T	<NON_REF>	.	.	END=41349	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	41350	.	G	<NON_REF>	.	.	END=41376	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,70
+Reference	41377	.	C	<NON_REF>	.	.	END=41463	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	41464	.	G	<NON_REF>	.	.	END=41605	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	41606	.	G	<NON_REF>	.	.	END=41640	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	41641	.	C	<NON_REF>	.	.	END=41714	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	41715	.	A	<NON_REF>	.	.	END=41715	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,23
+Reference	41716	.	C	<NON_REF>	.	.	END=41721	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	41722	.	T	<NON_REF>	.	.	END=41756	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	41757	.	G	<NON_REF>	.	.	END=41896	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	41897	.	G	<NON_REF>	.	.	END=41925	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	41926	.	T	<NON_REF>	.	.	END=41926	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	41927	.	A	<NON_REF>	.	.	END=41951	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	41952	.	G	<NON_REF>	.	.	END=42010	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	42011	.	C	<NON_REF>	.	.	END=42067	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	42068	.	C	<NON_REF>	.	.	END=42085	GT:DP:GQ:MIN_DP:PL	0/0:1:0:0:0,0,0
+Reference	42086	.	C	<NON_REF>	.	.	END=42091	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,27
+Reference	42092	.	T	<NON_REF>	.	.	END=42115	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	42116	.	C	<NON_REF>	.	.	END=42201	GT:DP:GQ:MIN_DP:PL	0/0:3:9:3:0,9,98
+Reference	42202	.	G	<NON_REF>	.	.	END=42205	GT:DP:GQ:MIN_DP:PL	0/0:3:6:3:0,6,90
+Reference	42206	.	A	<NON_REF>	.	.	END=42231	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	42232	.	C	<NON_REF>	.	.	END=42482	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	42483	.	G	<NON_REF>	.	.	END=42588	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	42589	.	G	<NON_REF>	.	.	END=42597	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,74
+Reference	42598	.	C	<NON_REF>	.	.	END=42704	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	42705	.	G	<NON_REF>	.	.	END=43497	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	43498	.	C	<NON_REF>	.	.	END=43503	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	43504	.	C	<NON_REF>	.	.	END=43612	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	43613	.	G	<NON_REF>	.	.	END=43618	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	43619	.	A	<NON_REF>	.	.	END=43999	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	44000	.	G	<NON_REF>	.	.	END=44008	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	44009	.	C	<NON_REF>	.	.	END=44115	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	44116	.	C	<NON_REF>	.	.	END=44124	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	44125	.	T	<NON_REF>	.	.	END=44435	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	44436	.	G	<NON_REF>	.	.	END=44550	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	44551	.	C	<NON_REF>	.	.	END=44916	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	44917	.	A	<NON_REF>	.	.	END=45010	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	45011	.	C	<NON_REF>	.	.	END=45011	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	45012	.	G	<NON_REF>	.	.	END=45015	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,42
+Reference	45016	.	C	<NON_REF>	.	.	END=45032	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	45033	.	A	<NON_REF>	.	.	END=45127	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	45128	.	C	<NON_REF>	.	.	END=45323	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	45324	.	C	<NON_REF>	.	.	END=45438	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	45439	.	G	<NON_REF>	.	.	END=46045	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	46046	.	A	<NON_REF>	.	.	END=46158	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	46159	.	A	<NON_REF>	.	.	END=46322	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	46323	.	A	<NON_REF>	.	.	END=46438	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	46439	.	T	<NON_REF>	.	.	END=46486	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	46487	.	A	<NON_REF>	.	.	END=46591	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	46592	.	C	<NON_REF>	.	.	END=46602	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,69
+Reference	46603	.	G	<NON_REF>	.	.	END=46707	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	46708	.	A	<NON_REF>	.	.	END=47094	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	47095	.	A	<NON_REF>	.	.	END=47156	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	47157	.	T	<NON_REF>	.	.	END=47209	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	47210	.	T	<NON_REF>	.	.	END=47272	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	47273	.	G	<NON_REF>	.	.	END=51062	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	51063	.	C	<NON_REF>	.	.	END=51178	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	51179	.	C	<NON_REF>	.	.	END=51653	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	51654	.	G	<NON_REF>	.	.	END=51768	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	51769	.	A	<NON_REF>	.	.	END=51883	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	51884	.	C	<NON_REF>	.	.	END=51999	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	52000	.	C	<NON_REF>	.	.	END=52567	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	52568	.	A	<NON_REF>	.	.	END=52683	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	52684	.	A	<NON_REF>	.	.	END=52986	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	52987	.	G	<NON_REF>	.	.	END=53102	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	53103	.	G	<NON_REF>	.	.	END=53506	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	53507	.	C	<NON_REF>	.	.	END=53622	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	53623	.	A	<NON_REF>	.	.	END=53722	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	53723	.	G	<NON_REF>	.	.	END=53837	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	53838	.	A	<NON_REF>	.	.	END=54058	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	54059	.	G	<NON_REF>	.	.	END=54150	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	54151	.	G	<NON_REF>	.	.	END=54174	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,74
+Reference	54175	.	C	<NON_REF>	.	.	END=54266	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	54267	.	T	<NON_REF>	.	.	END=54273	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	54274	.	C	<NON_REF>	.	.	END=54389	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	54390	.	T	<NON_REF>	.	.	END=54625	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	54626	.	A	<NON_REF>	.	.	END=54639	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	54640	.	G	<NON_REF>	.	.	END=54739	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	54740	.	C	<NON_REF>	.	.	END=54741	GT:DP:GQ:MIN_DP:PL	0/0:3:9:3:0,9,121
+Reference	54742	.	C	<NON_REF>	.	.	END=54755	GT:DP:GQ:MIN_DP:PL	0/0:3:6:2:0,6,80
+Reference	54756	.	A	<NON_REF>	.	.	END=54855	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	54856	.	T	<NON_REF>	.	.	END=54865	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	54866	.	T	<NON_REF>	.	.	END=54866	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,42
+Reference	54867	.	T	<NON_REF>	.	.	END=54867	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	54868	.	A	<NON_REF>	.	.	END=54980	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	54981	.	C	<NON_REF>	.	.	END=55082	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	55083	.	C	<NON_REF>	.	.	END=55198	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	55199	.	A	<NON_REF>	.	.	END=55534	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	55535	.	A	<NON_REF>	.	.	END=55650	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	55651	.	G	<NON_REF>	.	.	END=56899	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	56900	.	G	<NON_REF>	.	.	END=57015	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	57016	.	T	<NON_REF>	.	.	END=57477	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	57478	.	A	<NON_REF>	.	.	END=57510	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	57511	.	G	<NON_REF>	.	.	END=57511	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	57512	.	T	<NON_REF>	.	.	END=57560	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	57561	.	G	<NON_REF>	.	.	END=57592	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,37
+Reference	57593	.	C	<NON_REF>	.	.	END=57674	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	57675	.	G	<NON_REF>	.	.	END=57959	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	57960	.	C	<NON_REF>	.	.	END=58075	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	58076	.	G	<NON_REF>	.	.	END=59253	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	59254	.	G	<NON_REF>	.	.	END=59332	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,27
+Reference	59333	.	C	<NON_REF>	.	.	END=59367	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	59368	.	G	<NON_REF>	.	.	END=59448	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	59449	.	G	<NON_REF>	.	.	END=59570	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	59571	.	T	<NON_REF>	.	.	END=59684	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	59685	.	C	<NON_REF>	.	.	END=59906	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	59907	.	T	<NON_REF>	.	.	END=59909	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	59910	.	A	<NON_REF>	.	.	END=60022	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	60023	.	A	<NON_REF>	.	.	END=60024	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	60025	.	G	<NON_REF>	.	.	END=60459	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	60460	.	A	<NON_REF>	.	.	END=60573	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	60574	.	T	<NON_REF>	.	.	END=60575	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,80
+Reference	60576	.	T	<NON_REF>	.	.	END=60688	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	60689	.	A	<NON_REF>	.	.	END=60935	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	60936	.	A	<NON_REF>	.	.	END=61051	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	61052	.	G	<NON_REF>	.	.	END=61122	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	61123	.	A	<NON_REF>	.	.	END=61238	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	61239	.	G	<NON_REF>	.	.	END=61435	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	61436	.	T	<NON_REF>	.	.	END=61458	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	61459	.	C	<NON_REF>	.	.	END=61496	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	61497	.	G	<NON_REF>	.	.	END=61504	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	61505	.	T	<NON_REF>	.	.	END=61505	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,23
+Reference	61506	.	C	<NON_REF>	.	.	END=61574	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	61575	.	C	<NON_REF>	.	.	END=61621	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	61622	.	C	<NON_REF>	.	.	END=61727	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	61728	.	G	<NON_REF>	.	.	END=61728	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	61729	.	A	<NON_REF>	.	.	END=61730	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	61731	.	G	<NON_REF>	.	.	END=61731	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	61732	.	A	<NON_REF>	.	.	END=61736	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	61737	.	A	<NON_REF>	.	.	END=61787	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	61788	.	C	<NON_REF>	.	.	END=61819	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	61820	.	G	<NON_REF>	.	.	END=61820	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	61821	.	C	<NON_REF>	.	.	END=61901	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	61902	.	A	<NON_REF>	.	.	END=61929	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	61930	.	T	<NON_REF>	.	.	END=62044	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	62045	.	T	<NON_REF>	.	.	END=62264	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	62265	.	A	<NON_REF>	.	.	END=62296	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	62297	.	C	<NON_REF>	.	.	END=62380	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	62381	.	G	<NON_REF>	.	.	END=62384	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	62385	.	C	<NON_REF>	.	.	END=62385	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,0
+Reference	62386	.	G	<NON_REF>	.	.	END=62412	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,42
+Reference	62413	.	C	<NON_REF>	.	.	END=62978	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	62979	.	G	<NON_REF>	.	.	END=63094	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	63095	.	C	<NON_REF>	.	.	END=63751	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	63752	.	C	<NON_REF>	.	.	END=63866	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	63867	.	A	<NON_REF>	.	.	END=64075	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	64076	.	A	<NON_REF>	.	.	END=64133	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	64134	.	G	<NON_REF>	.	.	END=64191	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	64192	.	T	<NON_REF>	.	.	END=64248	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	64249	.	T	<NON_REF>	.	.	END=64795	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	64796	.	C	<NON_REF>	.	.	END=64811	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	64812	.	G	<NON_REF>	.	.	END=64842	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	64843	.	G	<NON_REF>	.	.	END=64843	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,13
+Reference	64844	.	C	<NON_REF>	.	.	END=64881	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	64882	.	C	<NON_REF>	.	.	END=64882	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,23
+Reference	64883	.	T	<NON_REF>	.	.	END=64910	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	64911	.	A	<NON_REF>	.	.	END=64927	GT:DP:GQ:MIN_DP:PL	0/0:2:3:1:0,3,42
+Reference	64928	.	T	<NON_REF>	.	.	END=65956	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	65957	.	A	<NON_REF>	.	.	END=66072	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	66073	.	C	<NON_REF>	.	.	END=66188	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	66189	.	C	<NON_REF>	.	.	END=66213	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	66214	.	G	<NON_REF>	.	.	END=66319	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	66320	.	C	<NON_REF>	.	.	END=66367	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	66368	.	T	<NON_REF>	.	.	END=66368	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	66369	.	C	<NON_REF>	.	.	END=66394	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	66395	.	G	<NON_REF>	.	.	END=66435	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	66436	.	G	<NON_REF>	.	.	END=66442	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	66443	.	C	G,<NON_REF>	39.31	.	DP=2;ExcessHet=0.0000;MLEAC=1,0;MLEAF=0.500,0.00;RAW_MQandDP=7200,2	GT:AD:DP:GQ:PL:SB	1/1:0,2,0:2:6:51,6,0,51,6,51:0,0,1,1
+Reference	66444	.	T	<NON_REF>	.	.	END=66510	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	66511	.	T	<NON_REF>	.	.	END=66673	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	66674	.	A	<NON_REF>	.	.	END=66789	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	66790	.	C	<NON_REF>	.	.	END=66821	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	66822	.	C	<NON_REF>	.	.	END=66937	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	66938	.	A	<NON_REF>	.	.	END=67257	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	67258	.	A	<NON_REF>	.	.	END=67311	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	67312	.	A	<NON_REF>	.	.	END=67372	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	67373	.	A	<NON_REF>	.	.	END=67423	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	67424	.	T	<NON_REF>	.	.	END=67844	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	67845	.	C	<NON_REF>	.	.	END=67886	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	67887	.	A	<NON_REF>	.	.	END=67959	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	67960	.	C	<NON_REF>	.	.	END=68002	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	68003	.	A	<NON_REF>	.	.	END=68766	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	68767	.	G	<NON_REF>	.	.	END=68881	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	68882	.	C	<NON_REF>	.	.	END=69419	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	69420	.	T	<NON_REF>	.	.	END=69535	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	69536	.	T	<NON_REF>	.	.	END=70346	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	70347	.	T	<NON_REF>	.	.	END=70443	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	70444	.	G	<NON_REF>	.	.	END=70444	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	70445	.	G	<NON_REF>	.	.	END=70462	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	70463	.	G	<NON_REF>	.	.	END=71290	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	71291	.	G	<NON_REF>	.	.	END=71378	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	71379	.	A	<NON_REF>	.	.	END=71406	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,74
+Reference	71407	.	T	<NON_REF>	.	.	END=71493	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	71494	.	C	<NON_REF>	.	.	END=72178	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	72179	.	G	<NON_REF>	.	.	END=72186	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	72187	.	C	<NON_REF>	.	.	END=72197	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	72198	.	C	<NON_REF>	.	.	END=72198	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,23
+Reference	72199	.	G	<NON_REF>	.	.	END=72273	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,56
+Reference	72274	.	G	<NON_REF>	.	.	END=72274	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,23
+Reference	72275	.	G	<NON_REF>	.	.	END=72294	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	72295	.	T	<NON_REF>	.	.	END=72300	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	72301	.	C	<NON_REF>	.	.	END=72564	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	72565	.	G	<NON_REF>	.	.	END=72637	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	72638	.	G	<NON_REF>	.	.	END=72638	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	72639	.	G	<NON_REF>	.	.	END=72680	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	72681	.	C	<NON_REF>	.	.	END=72939	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	72940	.	T	<NON_REF>	.	.	END=73055	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	73056	.	T	<NON_REF>	.	.	END=73212	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	73213	.	G	<NON_REF>	.	.	END=73328	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	73329	.	T	<NON_REF>	.	.	END=73698	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	73699	.	G	<NON_REF>	.	.	END=73726	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	73727	.	C	<NON_REF>	.	.	END=73746	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,50
+Reference	73747	.	T	<NON_REF>	.	.	END=73747	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,13
+Reference	73748	.	C	<NON_REF>	.	.	END=73789	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	73790	.	G	<NON_REF>	.	.	END=73790	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,13
+Reference	73791	.	G	<NON_REF>	.	.	END=73813	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	73814	.	C	<NON_REF>	.	.	END=73841	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,42
+Reference	73842	.	T	<NON_REF>	.	.	END=73867	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	73868	.	C	<NON_REF>	.	.	END=73983	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	73984	.	A	<NON_REF>	.	.	END=74034	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	74035	.	G	<NON_REF>	.	.	END=74150	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	74151	.	G	<NON_REF>	.	.	END=74417	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	74418	.	C	<NON_REF>	.	.	END=74532	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	74533	.	C	<NON_REF>	.	.	END=74771	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	74772	.	G	<NON_REF>	.	.	END=74845	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	74846	.	A	<NON_REF>	.	.	END=74886	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	74887	.	G	<NON_REF>	.	.	END=74959	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	74960	.	C	<NON_REF>	.	.	END=75294	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	75295	.	T	<NON_REF>	.	.	END=75408	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	75409	.	G	<NON_REF>	.	.	END=75593	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	75594	.	A	<NON_REF>	.	.	END=75663	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	75664	.	T	<NON_REF>	.	.	END=75664	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	75665	.	C	<NON_REF>	.	.	END=75707	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	75708	.	G	<NON_REF>	.	.	END=76447	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	76448	.	G	<NON_REF>	.	.	END=76541	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	76542	.	A	<NON_REF>	.	.	END=76563	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,74
+Reference	76564	.	T	<NON_REF>	.	.	END=76570	GT:DP:GQ:MIN_DP:PL	0/0:2:3:2:0,3,45
+Reference	76571	.	G	<NON_REF>	.	.	END=76571	GT:DP:GQ:MIN_DP:PL	0/0:2:0:2:0,0,0
+Reference	76572	.	G	<NON_REF>	.	.	END=76656	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	76657	.	C	<NON_REF>	.	.	END=77095	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	77096	.	C	<NON_REF>	.	.	END=77143	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	77144	.	C	<NON_REF>	.	.	END=77144	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	77145	.	A	<NON_REF>	.	.	END=77210	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	77211	.	C	<NON_REF>	.	.	END=77572	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	77573	.	T	<NON_REF>	.	.	END=77674	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	77675	.	T	<NON_REF>	.	.	END=77675	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	77676	.	G	<NON_REF>	.	.	END=77683	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	77684	.	T	<NON_REF>	.	.	END=77684	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	77685	.	C	<NON_REF>	.	.	END=77686	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,42
+Reference	77687	.	A	<NON_REF>	.	.	END=78127	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	78128	.	A	<NON_REF>	.	.	END=78242	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	78243	.	A	<NON_REF>	.	.	END=78316	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	78317	.	A	<NON_REF>	.	.	END=78431	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	78432	.	C	<NON_REF>	.	.	END=78863	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	78864	.	G	<NON_REF>	.	.	END=78977	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	78978	.	C	<NON_REF>	.	.	END=79438	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	79439	.	G	<NON_REF>	.	.	END=79554	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	79555	.	T	<NON_REF>	.	.	END=79664	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	79665	.	T	<NON_REF>	.	.	END=79778	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	79779	.	G	<NON_REF>	.	.	END=79784	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	79785	.	A	<NON_REF>	.	.	END=79899	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	79900	.	C	<NON_REF>	.	.	END=80527	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	80528	.	A	<NON_REF>	.	.	END=80643	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	80644	.	C	<NON_REF>	.	.	END=80966	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	80967	.	C	<NON_REF>	.	.	END=81082	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	81083	.	T	<NON_REF>	.	.	END=81407	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	81408	.	C	<NON_REF>	.	.	END=81498	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	81499	.	G	<NON_REF>	.	.	END=81499	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	81500	.	C	<NON_REF>	.	.	END=81522	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	81523	.	G	<NON_REF>	.	.	END=81707	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	81708	.	T	<NON_REF>	.	.	END=81823	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	81824	.	G	<NON_REF>	.	.	END=81837	GT:DP:GQ:MIN_DP:PL	0/0:1:0:0:0,0,0
+Reference	81838	.	C	<NON_REF>	.	.	END=81953	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	81954	.	G	<NON_REF>	.	.	END=83394	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	83395	.	A	<NON_REF>	.	.	END=83510	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	83511	.	G	<NON_REF>	.	.	END=84003	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	84004	.	C	<NON_REF>	.	.	END=84119	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	84120	.	C	<NON_REF>	.	.	END=84734	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	84735	.	C	<NON_REF>	.	.	END=84849	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	84850	.	A	<NON_REF>	.	.	END=84897	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	84898	.	G	<NON_REF>	.	.	END=85012	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	85013	.	C	<NON_REF>	.	.	END=85065	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	85066	.	G	<NON_REF>	.	.	END=85180	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	85181	.	A	<NON_REF>	.	.	END=85402	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	85403	.	A	<NON_REF>	.	.	END=85518	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	85519	.	T	<NON_REF>	.	.	END=85830	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	85831	.	C	<NON_REF>	.	.	END=85946	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	85947	.	T	<NON_REF>	.	.	END=85956	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	85957	.	G	<NON_REF>	.	.	END=85979	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	85980	.	C	<NON_REF>	.	.	END=85980	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	85981	.	A	<NON_REF>	.	.	END=86071	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	86072	.	A	<NON_REF>	.	.	END=87473	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	87474	.	A	<NON_REF>	.	.	END=87502	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,38
+Reference	87503	.	A	<NON_REF>	.	.	END=87503	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	87504	.	T	<NON_REF>	.	.	END=87586	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	87587	.	T	<NON_REF>	.	.	END=87879	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	87880	.	C	<NON_REF>	.	.	END=87995	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	87996	.	G	<NON_REF>	.	.	END=88001	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	88002	.	C	<NON_REF>	.	.	END=88117	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	88118	.	C	<NON_REF>	.	.	END=88537	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	88538	.	A	<NON_REF>	.	.	END=88653	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	88654	.	G	<NON_REF>	.	.	END=92166	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	92167	.	G	<NON_REF>	.	.	END=92280	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	92281	.	A	<NON_REF>	.	.	END=92806	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	92807	.	C	<NON_REF>	.	.	END=92871	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	92872	.	G	<NON_REF>	.	.	END=92922	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	92923	.	C	<NON_REF>	.	.	END=92954	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	92955	.	T	<NON_REF>	.	.	END=92987	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	92988	.	A	<NON_REF>	.	.	END=93070	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	93071	.	A	<NON_REF>	.	.	END=93442	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	93443	.	T	<NON_REF>	.	.	END=93542	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	93543	.	T	<NON_REF>	.	.	END=93557	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,45
+Reference	93558	.	G	<NON_REF>	.	.	END=93658	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	93659	.	A	<NON_REF>	.	.	END=93784	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	93785	.	G	<NON_REF>	.	.	END=93898	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	93899	.	T	<NON_REF>	.	.	END=94189	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	94190	.	A	<NON_REF>	.	.	END=94303	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,32
+Reference	94304	.	C	<NON_REF>	.	.	END=96049	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	96050	.	A	<NON_REF>	.	.	END=96142	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	96143	.	G	<NON_REF>	.	.	END=96160	GT:DP:GQ:MIN_DP:PL	0/0:2:6:2:0,6,60
+Reference	96161	.	T	<NON_REF>	.	.	END=96231	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	96232	.	C	<NON_REF>	.	.	END=96232	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	96233	.	A	<NON_REF>	.	.	END=96257	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	96258	.	G	<NON_REF>	.	.	END=96462	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	96463	.	C	<NON_REF>	.	.	END=96493	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	96494	.	C	<NON_REF>	.	.	END=96494	GT:DP:GQ:MIN_DP:PL	0/0:1:0:1:0,0,0
+Reference	96495	.	T	<NON_REF>	.	.	END=96578	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	96579	.	C	<NON_REF>	.	.	END=96837	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	96838	.	C	<NON_REF>	.	.	END=96953	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	96954	.	A	<NON_REF>	.	.	END=97621	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	97622	.	C	<NON_REF>	.	.	END=97736	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	97737	.	C	<NON_REF>	.	.	END=98165	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
+Reference	98166	.	G	<NON_REF>	.	.	END=98281	GT:DP:GQ:MIN_DP:PL	0/0:1:3:1:0,3,19
+Reference	98282	.	G	<NON_REF>	.	.	END=100245	GT:DP:GQ:MIN_DP:PL	0/0:0:0:0:0,0,0
