@@ -199,8 +199,7 @@ This genomic pipeline is designed to automate sequencing data processing using A
 6. **Step Functions → Lambda/EC2**: Step Functions orchestrate the workflow using **IAM roles** for managing permissions between all services.
 
 #### An architecture diagram can be found in the figure below
-
-![architecture_diagram.png](figures/aws-architecture-figure.png).
+![aws-architecture-figure](https://github.com/user-attachments/assets/41d5386f-952e-4b98-8b2a-7cfd281f1066)
 
 ## Cost Estimate
 
