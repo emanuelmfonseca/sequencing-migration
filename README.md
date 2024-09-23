@@ -150,7 +150,7 @@ snakemake --cores 4
     - Example: `data/genome-simulations/genomes_1/qc/genome_1_R1_fastqc.html`.
   
   - **Trimmed FASTQ files**: FASTQ files after trimming.
-    - Example: `data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq`.
+    - Example: <small>`data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq`.<small>
 
   - **Demultiplexed FASTQ files**: FASTQ files split by sample.
     - Example: `data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_R1_demultiplexed.fastq`.
