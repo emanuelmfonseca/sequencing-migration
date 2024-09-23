@@ -200,7 +200,7 @@ This genomic pipeline is designed to automate sequencing data processing using A
 
 #### An architecture diagram can be found in the figure below
 
-![architecture_diagram.png](figures/aws-architecture.png).
+![architecture_diagram.png](figures/aws-architecture-figure.png).
 
 ## Cost Estimate
 
