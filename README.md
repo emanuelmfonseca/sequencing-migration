@@ -49,19 +49,6 @@ You can install all the required dependencies by following these steps:
 
 This will automatically install **Snakemake** and any other necessary packages specified in the environment configuration. **Snakemake** is a powerful workflow management system designed to create reproducible, scalable, and automated data analysis pipelines.
 
-4. Install the AWS CLI if it's not included in your Conda environment:
-
-    ```bash
-    conda install -c conda-forge awscli
-    ```
-
-### Setup AWS Credentials
-Configure your AWS credentials for S3 access:
-
-```bash
-aws configure
-```
-
 ## Pipeline Overview
 The pipeline processes simulated sequencing data by performing primary and secondary analysis stages, including demultiplexing, alignment, and variant calling.
 
