@@ -29,8 +29,8 @@ Ensure you have the following dependencies installed:
 You can install the required dependencies by running:
 
 ```bash
-conda create -n genomics-pipeline python=3.8 snakemake awscli
-conda activate genomics-pipeline
+conda env create -f envs/environment.yml
+conda activate sequencing-migration
 ```
 
 ### Setup AWS Credentials
@@ -51,31 +51,64 @@ cd genomics-pipeline
 ## Pipeline Overview
 The pipeline processes simulated sequencing data by performing primary and secondary analysis stages, including demultiplexing, alignment, and variant calling.
 
-### Stages:
-1. **Primary Analysis**: Demultiplexes raw FASTQ files.
-2. **Secondary Analysis**: Aligns reads to a reference genome and calls variants.
+### Primary Analysis
+
+The primary analysis focuses on the initial steps of preparing the data. This phase is crucial because it ensures that we generate high-quality datasets, including trimmed reads and assessments for adapter sequences. By establishing these initial steps, we improve the quality of the subsequent analysis.
+
+- **Generate SNP Matrices**
+    - The first step involves running a demographic simulation script to create SNP matrices for multiple weekly runs. This simulates genetic variation based on input demographic parameters.
+
+- **Generate Genomes**
+    - In this stage, reference and individual genomes are generated from the SNP matrices. This involves using another simulation script to produce FASTA files for each weekly run, creating both reference genomes and individual genomes for the specified number of samples.
+
+- **Concatenate Individual Genomes**
+    - Individual genome FASTA files are concatenated into multi-FASTA files for each weekly run. This prepares the data for generating reads in the next step.
+
+- **Simulate Reads**
+-    The multi-FASTA genomes are used to generate simulated FASTQ files (R1 and R2) using the InSilicoSeq tool. This step simulates sequencing reads for the genome.
+
+- **Quality Assessment of Raw Reads**
+    - FastQC reports are generated for the simulated FASTQ files to assess the quality of the sequencing data.
+
+- **Trimming Reads**
+    - Trimmomatic is utilized to trim the raw FASTQ files to remove low-quality bases and adapter sequences, producing cleaned FASTQ files.
+
+- **Quality Assessment of Trimmed Reads**
+    - FastQC reports are generated again for the trimmed reads to evaluate the quality after trimming.
+
+- **Demultiplexing**
+    - The trimmed FASTQ files are demultiplexed into sample-specific files based on predefined patterns, allowing for separate analysis of each sample's reads.
+
+
+### Secondary Analysis
+
+The secondary analysis begins with indexing the reference genome, which organizes it for efficient access. This allows individual sample reads to be mapped to the reference genome, aligning their sequences accurately. Once the reads are aligned, genetic variants can be identified by comparing the sample data to the reference, enabling detailed analysis of genetic differences within the dataset.
+
+- **Index Reference Genome**
+    - The reference genome is indexed using BWA to prepare for alignment. This step includes generating necessary auxiliary files (like the FASTA index and sequence dictionary).
+
+- **Align Reads**
+    - The demultiplexed FASTQ files are aligned to the reference genome using BWA. The results are stored in SAM and BAM formats, with sorting and duplicate marking performed for each sample.
+
+- **Variant Calling**
+    - GATK's HaplotypeCaller is used for variant calling on the aligned BAM files, producing GVCF files for each sample.
+
+- **Combine GVCFs and Genotype**
+    - GVCF files from all samples are combined, and GATK's GenotypeGVCFs is run for final variant calling, resulting in a comprehensive VCF file for the weekly run.
 
 ## Input Data
-The input data for this pipeline comes from **simulations** of genomic sequencing processes.
-
-- **Simulated Data**: FASTQ files generated from simulations.
-- **Reference Genome**: Reference genome in FASTA format.
-
-### Example input:
-- `data/genome-simulations/genomes_1/fastq/genome_1_R1.fastq`
-- `data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta`
+The input data for this pipeline is automatically generated from simulations of genomic sequencing processes, requiring no external input.
 
 ## Usage
-### Step-by-Step Instructions
-1. **Edit Configuration File**: 
-   Modify the `config.yaml` file to specify the input files and paths:
 
-#### Main Parameters
-- working_directory: "/path/to/github_folder"  # Specify the full path to the working directory for your project
-- weekly_runs: Number of independent genomic runs to perform each week
-- nsamples: Number of individuals (samples) processed in each run
-- ncpus: Number of available CPU cores for parallel processing
+**Edit Configuration File** 
+   Modify the `config.yaml` file to define the necessary paths and key parameters:
 
+   #### Main Parameters
+      - working_directory: Specify the full path to the working directory for your project
+      - weekly_runs: Number of independent genomic runs to perform
+      - nsamples: Number of individuals (samples) processed in each run
+      - ncpus: Number of available CPU cores for parallel processing
 
 2. **Run the Pipeline**:
    To execute the pipeline, run the following command:
@@ -91,14 +124,33 @@ snakemake --cores <number_of_cores>
 snakemake --cores 4
 ```
 
-## Outputs
-The pipeline generates the following outputs:
-- **BAM files**: Aligned sequence data.
-- **VCF files**: Variant calls.
+### Output
 
-### Example output:
-- `data/genome-simulations/genomes_1/demultiplexed/sample_1/dedup_sorted_aligned_genome_1.bam`
-- `data/fully-processed-data/genomes_fully_processed_run_1.vcf`
+- The pipeline generates various outputs at each stage, including:
+
+  - **SNP matrix**: A matrix of single nucleotide polymorphisms for each sample, used for population genetic analyses.
+    - Example: `data/demographic-simulations/snp-matrix_1.txt`.
+
+  - **Reference genome**: The reference genome used for alignment and variant calling.
+    - Example: `data/genome-simulations/genomes_1/fasta/reference_genome_1.fasta`.
+
+  - **Quality reports**: FastQC HTML files for raw and trimmed reads.
+    - Example: `data/genome-simulations/genomes_1/qc/genome_1_R1_fastqc.html`.
+  
+  - **Trimmed FASTQ files**: FASTQ files after trimming.
+    - Example: `data/genome-simulations/genomes_1/fastq_trimmed/genome_1_R1_trimmed.fastq`.
+
+  - **Demultiplexed FASTQ files**: FASTQ files split by sample.
+    - Example: `data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_R1_demultiplexed.fastq`.
+
+  - **Aligned SAM and BAM files**: Aligned sequence data and associated metrics.
+    - Example: `data/genome-simulations/genomes_1/demultiplexed/sample_1/dedup_sorted_aligned_genome_1.bam`.
+
+  - **Index files**: Index files for efficient BAM file access.
+    - Example: `data/genome-simulations/genomes_1/demultiplexed/sample_1/dedup_sorted_aligned_genome_1.bam.bai`.
+
+  - **Variant call files (VCFs)**: Individual and combined VCFs.
+    - Example: `data/fully-processed-data/genomes_fully_processed_run_1.vcf`.
 
 ## AWS Architecture
 The pipeline can be deployed on AWS, utilizing:

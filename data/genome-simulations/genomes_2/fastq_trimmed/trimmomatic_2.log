@@ -12,5 +12,5 @@ java.io.FileNotFoundException: /Users/emanuelmfonseca/project/sequencing-migrati
 	at org.usadellab.trimmomatic.Trimmomatic.createTrimmers(Trimmomatic.java:59)
 	at org.usadellab.trimmomatic.TrimmomaticPE.run(TrimmomaticPE.java:552)
 	at org.usadellab.trimmomatic.Trimmomatic.main(Trimmomatic.java:80)
-Input Read Pairs: 500 Both Surviving: 493 (98.60%) Forward Only Surviving: 6 (1.20%) Reverse Only Surviving: 1 (0.20%) Dropped: 0 (0.00%)
+Input Read Pairs: 500 Both Surviving: 493 (98.60%) Forward Only Surviving: 7 (1.40%) Reverse Only Surviving: 0 (0.00%) Dropped: 0 (0.00%)
 TrimmomaticPE: Completed successfully
