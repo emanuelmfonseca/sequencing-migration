@@ -111,10 +111,10 @@ The secondary analysis begins with indexing the reference genome, which organize
 
 ## Usage
 
-## Input Data
+### Input Data
 The input data for this pipeline is automatically generated from simulations of genomic sequencing processes, eliminating the need for external input. However, modifying the configuration file is necessary, particularly to update the working directory.
 
-1. **Edit Configuration File** 
+**Edit Configuration File** 
    Modify the `config.yaml` file to define the necessary paths and key parameters:
 
    #### Main Parameters
@@ -123,7 +123,7 @@ The input data for this pipeline is automatically generated from simulations of 
       - nsamples: Number of individuals (samples) processed in each run
       - ncpus: Number of available CPU cores for parallel processing
 
-2. **Run the Pipeline**:
+**Run the Pipeline**:
    To execute the pipeline, run the following command:
 
 ```bash
@@ -137,7 +137,7 @@ snakemake --cores <number_of_cores>
 snakemake --cores 4
 ```
 
-3. ### Output
+### Output
 
 - The pipeline generates various outputs at each stage, including:
 
