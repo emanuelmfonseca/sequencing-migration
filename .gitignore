@@ -4,6 +4,7 @@
 .snakemake
 /data
 !scripts/*.py
+.DS_Store
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
