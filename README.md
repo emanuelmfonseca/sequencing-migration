@@ -214,15 +214,70 @@ This genomic pipeline is designed to automate sequencing data processing using A
 
 #### An architecture diagram can be found in the figure below
 
-![architecture_diagram.png](figures/aws-architecture.png).
+![architecture_diagram.png](figures/aws-architecture-figure.png).
 
 ## Cost Estimate
-A cost estimate for running the pipeline on AWS has been calculated using the AWS Pricing Calculator. This includes:
-- EC2 instances for processing
-- S3 for data storage
-- AWS Batch for workflow orchestration
 
-Details can be found in the `cost_estimate.txt` file.
+**Here are preliminary cost estimates for the key AWS services involved in the genomic pipeline, as calculated using the AWS Pricing Calculator:**
+
+### 1. **Amazon S3**
+- **Storage**: 1.1 TB of data per month
+  - Price for S3 Standard: ~$0.023 per GB/month
+  - Monthly storage cost: **$25.30** (1.1 TB * 1024 GB/TB * $0.023)
+  
+- **Data Retrieval**: It is assumed that the entire 1.1 TB of data will be retrieved once per month for processing
+  - Standard retrieval: ~$0.01 per GB
+  - Retrieval cost: **$11** (1.1 TB * 1024 GB/TB * $0.01)
+
+### 2. **EC2 Instances (for Snakemake pipeline)**:
+- **Instance type**: m5.large (2 vCPUs, 8 GB RAM)
+- **Estimated hours per sequencing run**: 24 hours per run
+- **Runs per week**: 8 runs (total 32 runs/month)
+- **Total hours per month**: 
+  - 24 hours per run * 32 runs/month = **768 hours per month**
+- **Price for m5.large**: ~$0.096 per hour
+- **Monthly EC2 cost**: 
+  - 768 hours * $0.096 = **$73.73** per month
+
+### 3. **Lambda (Trigger function)**:
+- **Number of invocations**: 32 per month (one per sequencing run)
+- **Execution time**: ~1 second (1000 ms)
+- **Memory**: 128 MB
+  - Price: $0.00001667 per request (100 ms increments)
+  - Monthly Lambda cost: **$0.05** (32 invocations * $0.00001667)
+
+### 4. **AWS Batch**:
+- Assume 10 EC2 instances (m5.large) running in parallel for batch jobs
+- **Total runtime for batch jobs**: 24 hours per run
+- **Total EC2 hours for Batch**: 10 instances * 24 hours = **240 hours per run**
+- **For 32 runs per month**:
+  - 240 hours per run * 32 runs = **7,680 hours per month**
+- **Price for m5.large**: ~$0.096 per hour
+- **Monthly Batch cost**: 
+  - 7,680 hours * $0.096 = **$737.28** per month
+
+### 5. **CloudWatch (Monitoring and Logging)**
+- **Logs volume**: 10 GB/month
+- **Custom metrics**: 5 metrics/month
+  - Log storage cost: ~$0.50 per GB
+  - Metrics cost: ~$0.30 per metric
+  - Monthly CloudWatch cost: **$8.50** (10 GB * $0.50 + 5 metrics * $0.30)
+
+### 6. **Step Functions**
+- **State transitions**: 32 transitions (1 per sequencing run)
+  - Cost per transition: $0.025 per 1,000 transitions
+  - Monthly Step Functions cost: **$0.01** (32 transitions * $0.025/1000)
+
+### **Summary of Estimated Monthly Costs**:
+1. **S3 Storage and Retrieval**: **$36.30**
+2. **EC2 for Snakemake Pipeline**: **$73.73**
+3. **Lambda**: **$0.05**
+4. **AWS Batch**: **$737.28**
+5. **CloudWatch**: **$8.50**
+6. **Step Functions**: **$0.01**
+
+### **Total Monthly Cost**:
+- **With AWS Batch**: **$855.87**
 
 ## Development and Testing Environment
 This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
