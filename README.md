@@ -28,7 +28,7 @@ To run this project, you will need the following dependencies installed:
 
 ### Installation Instructions
 
-You can install all the required dependencies by following these steps:
+**Follow these steps to install Conda and access the pipeline:**
 
 1. Ensure you have Conda installed. If not, you can download it from [here](https://docs.conda.io/en/latest/miniconda.html).
 
