@@ -1,3 +1,0 @@
-TypeError in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 8:
-conda() got an unexpected keyword argument 'output'
-  File "/Users/emanuelmfonseca/project/sequencing-migration/Snakefile", line 8, in <module>

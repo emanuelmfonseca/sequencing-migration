@@ -1,7 +1,0 @@
-Building DAG of jobs...
-MissingInputException in rule 22 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 343:
-Missing input files for rule 22:
-    output: data/genome-simulations/genomes_1/demultiplexed/sample_1/sample_1_1.g.vcf
-    affected files:
-        data/genome-simulations/genomes_1/demultiplexed/sample_1/sorted_aligned_genome_1.bam.bai
-        data/genome-simulations/genomes_1/demultiplexed/sample_1/sorted_aligned_genome_1.bam

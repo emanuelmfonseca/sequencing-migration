@@ -1,6 +1,0 @@
-Building DAG of jobs...
-InputFunctionException in rule 6 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 71:
-Error:
-  Function did not return str or iterable of str. Encountered: [2] (<class 'list'>)
-Wildcards:
- (rule 6, line 134, /Users/emanuelmfonseca/project/sequencing-migration/Snakefile)

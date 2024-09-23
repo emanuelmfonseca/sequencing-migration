@@ -1,7 +1,0 @@
-Building DAG of jobs...
-MissingInputException in rule 18 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 293:
-Missing input files for rule 18:
-    output: data/genome-simulations/genomes_1/demultiplexed/sample_1/aligned_genome_1.sam, data/genome-simulations/genomes_1/demultiplexed/sample_1/aligned_genome_1.bam, data/genome-simulations/genomes_1/demultiplexed/sample_1/sorted_aligned_genome_1.bam, data/genome-simulations/genomes_1/demultiplexed/sample_1/sorted_aligned_genome_1.bam.bai
-    affected files:
-        data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_RR2_demultiplexed.fastq
-        data/genome-simulations/genomes_1/demultiplexed/sample_1/genome_1_Ind1_RR1_demultiplexed.fastq

@@ -1,6 +1,0 @@
-Building DAG of jobs...
-MissingInputException in rule genome_simulation in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 16:
-Missing input files for rule genome_simulation:
-    output: data/genome-simulations/genome-output.txt
-    affected files:
-        /Users/emanuelmfonseca/project/sequencing-migrationgenome-simulation.py

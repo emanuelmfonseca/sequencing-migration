@@ -1,6 +1,0 @@
-Building DAG of jobs...
-MissingInputException in rule all in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 4:
-Missing input files for rule all:
-    affected files:
-        data/genome-simulations/genomes_2/aligned_genome/sorted_aligned_genome_2.bam.bai
-        data/genome-simulations/genomes_1/aligned_genome/sorted_aligned_genome_1.bam.bai

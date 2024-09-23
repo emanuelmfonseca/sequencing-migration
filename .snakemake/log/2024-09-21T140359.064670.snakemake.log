@@ -1,7 +1,0 @@
-The flag 'directory' used in rule run_simulation is only valid for outputs, not inputs.
-Building DAG of jobs...
-MissingInputException in rule run_simulation in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 3:
-Missing input files for rule run_simulation:
-    output: snp-matrix.txt
-    affected files:
-        data/demographic-simulations

@@ -1,6 +1,0 @@
-Building DAG of jobs...
-MissingInputException in rule 26 in file /Users/emanuelmfonseca/project/sequencing-migration/Snakefile, line 365:
-Missing input files for rule 26:
-    output: data/genome-simulations/genomes_1/gatk/combined_genomes_run_1.g.vcf
-    affected files:
-        /data/genome-simulations/genomes_1/demultiplexed
