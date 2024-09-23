@@ -103,11 +103,11 @@ The input data for this pipeline is automatically generated from simulations of 
 
 **Edit Configuration File**: Modify the `config.yaml` file to define the necessary paths and key parameters:
 
-   #### Main Parameters
-      - working_directory: Specify the full path to the working directory for your project
-      - weekly_runs: Number of independent genomic runs to perform
-      - nsamples: Number of individuals (samples) processed in each run
-      - ncpus: Number of available CPU cores for parallel processing
+#### Main Parameters
+  - working_directory: Specify the full path to the working directory for your project
+  - weekly_runs: Number of independent genomic runs to perform
+  - nsamples: Number of individuals (samples) processed in each run
+  - ncpus: Number of available CPU cores for parallel processing
 
 **Run the Pipeline**:
    To execute the pipeline, run the following command:
