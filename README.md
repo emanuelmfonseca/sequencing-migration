@@ -182,11 +182,11 @@ A cost estimate for running the pipeline on AWS has been calculated using the AW
 
 Details can be found in the `cost_estimate.txt` file.
 
-## Contributing
-Contributions are welcome. Please open an issue or submit a pull request for any improvements.
-
 ## Development and Testing Environment
 This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
+
+## Contributing
+Contributions are welcome. Please open an issue or submit a pull request for any improvements. For questions, feel free to email emanuelmfonseca@gmail.com.
 
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for details.
