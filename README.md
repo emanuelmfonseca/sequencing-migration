@@ -114,9 +114,7 @@ The secondary analysis begins with indexing the reference genome, which organize
 ### Input Data
 The input data for this pipeline is automatically generated from simulations of genomic sequencing processes, eliminating the need for external input. However, modifying the configuration file is necessary, particularly to update the working directory.
 
-**Edit Configuration File** 
-   
-   Modify the `config.yaml` file to define the necessary paths and key parameters:
+**Edit Configuration File**: Modify the `config.yaml` file to define the necessary paths and key parameters:
 
    #### Main Parameters
       - working_directory: Specify the full path to the working directory for your project
@@ -185,6 +183,9 @@ Details can be found in the `cost_estimate.txt` file.
 
 ## Contributing
 Contributions are welcome. Please open an issue or submit a pull request for any improvements.
+
+## Development and Testing Environment
+This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
 
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for details.
