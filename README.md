@@ -189,8 +189,7 @@ This genomic pipeline is designed to automate sequencing data processing using A
 - The **EC2 instance**, using its **IAM role**, ensures that results are securely stored in both **S3** and Quilt for traceability.
 
 #### **5. Batch Processing**:
-- For larger datasets, **AWS Batch** can be used for parallel processing. Lambda submits jobs to AWS Batch, which provisions EC2 instances to run the pipeline.
-- **IAM roles** on AWS Batch instances allow them to access S3 data, interact with Quilt, and execute Snakemake workflows securely.
+- For larger datasets, **AWS Step Functions** will be used to orchestrate parallel processing. Step Functions will manage the workflow by submitting jobs to **AWS Batch**, which provisions **EC2** instances to run the Snakemake pipeline. **IAM roles** assigned to the **AWS Batch** instances will ensure secure access to **S3** data, interaction with **Quilt** for metadata management, and the execution of the Snakemake workflows.
 
 #### **6. Workflow Orchestration with Step Functions**:
 - **AWS Step Functions** orchestrate the pipeline, ensuring tasks such as data retrieval, processing, and storage are completed sequentially.
@@ -215,7 +214,7 @@ This genomic pipeline is designed to automate sequencing data processing using A
 
 #### An architecture diagram can be found in the figure below
 
-![architecture_diagram.png](figures/aws-architecture-figure.png).
+![architecture_diagram.png](figures/aws-architecture.png).
 
 ## Cost Estimate
 A cost estimate for running the pipeline on AWS has been calculated using the AWS Pricing Calculator. This includes:
