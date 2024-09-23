@@ -115,6 +115,7 @@ The secondary analysis begins with indexing the reference genome, which organize
 The input data for this pipeline is automatically generated from simulations of genomic sequencing processes, eliminating the need for external input. However, modifying the configuration file is necessary, particularly to update the working directory.
 
 **Edit Configuration File** 
+   
    Modify the `config.yaml` file to define the necessary paths and key parameters:
 
    #### Main Parameters
