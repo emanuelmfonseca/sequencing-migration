@@ -223,7 +223,8 @@ This genomic pipeline is designed to automate sequencing data processing using A
 ### 1. **Amazon S3**
 - **Storage**: 1.1 TB of data per month
   - Price for S3 Standard: ~$0.023 per GB/month
-  - Monthly storage cost: **$25.30** (1.1 TB * 1024 GB/TB * $0.023)
+  - Intermediate files, such as SAM and BAM, typically require 2-3 times more storage than the original raw data.
+  - Monthly storage cost: **$77.72** (3 * 1.1 TB * 1024 GB/TB * $0.023)
   
 - **Data Retrieval**: It is assumed that the entire 1.1 TB of data will be retrieved once per month for processing
   - Standard retrieval: ~$0.01 per GB
@@ -269,7 +270,7 @@ This genomic pipeline is designed to automate sequencing data processing using A
   - Monthly Step Functions cost: **$0.01** (32 transitions * $0.025/1000)
 
 ### **Summary of Estimated Monthly Costs**:
-1. **S3 Storage and Retrieval**: **$36.30**
+1. **S3 Storage and Retrieval**: **$77.72**
 2. **EC2 for Snakemake Pipeline**: **$73.73**
 3. **Lambda**: **$0.05**
 4. **AWS Batch**: **$737.28**
@@ -277,7 +278,7 @@ This genomic pipeline is designed to automate sequencing data processing using A
 6. **Step Functions**: **$0.01**
 
 ### **Total Monthly Cost**:
-- **With AWS Batch**: **$855.87**
+- **With AWS Batch**: **$897.29**
 
 ## Development and Testing Environment
 This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
