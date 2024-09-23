@@ -277,8 +277,7 @@ This genomic pipeline is designed to automate sequencing data processing using A
 5. **CloudWatch**: **$8.50**
 6. **Step Functions**: **$0.01**
 
-### **Total Monthly Cost**:
-- **With AWS Batch**: **$897.29**
+### **Total Monthly Cost**: **$897.29**
 
 ## Development and Testing Environment
 This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
