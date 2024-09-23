@@ -167,52 +167,53 @@ snakemake --cores 4
 
 ## AWS Architecture
 
-### **Genomic Data Processing Pipeline Using AWS with IAM Integration**:
+### **Genomic Data Processing Pipeline Using AWS with IAM and Quilt Integration**:
 
-This genomic pipeline is designed to automate sequencing data processing using various AWS services, ensuring scalability, automation, and secure access management using **IAM**. The workflow involves data ingestion, processing, and storage, managed entirely through AWS infrastructure.
+This genomic pipeline is designed to automate sequencing data processing using AWS services, Quilt for data management, and secure access management through **IAM**. The workflow covers data ingestion, processing, and storage, managed entirely through AWS infrastructure with Quilt providing version control and data lineage.
 
-#### **1. Data Ingestion into S3**:
-- Sequencing data is uploaded to an **S3 bucket**. This bucket serves as the central storage location for raw sequencing data (e.g., FASTQ files), intermediate results, and final outputs.
-- **IAM roles** are assigned to ensure that only authorized services and users have the ability to read and write data to the S3 bucket.
-- Every time new data is uploaded, an event is triggered within AWS to start the pipeline.
+#### **1. Data Ingestion into S3 and Quilt**:
+- Sequencing data is uploaded to an **S3 bucket** and registered in **Quilt** for data management. S3 serves as the central storage for raw sequencing data (e.g., FASTQ files), intermediate results, and final outputs, while Quilt ensures metadata tracking and versioning.
+- **IAM roles** control access to S3 and Quilt, allowing only authorized services and users to read and write data.
+- Every time new data is uploaded, an event triggers AWS services to start the pipeline.
 
 #### **2. Lambda Trigger**:
-- **AWS Lambda** is automatically triggered when new data is uploaded to the **S3 bucket**. Lambda functions have an **IAM role** attached to them, which grants them the permission to read from S3, execute workflows, and interact with other services (like EC2 or AWS Batch).
-- This ensures secure automation of the pipeline whenever new data becomes available.
+- **AWS Lambda** is automatically triggered when new data is uploaded to **S3** and registered in Quilt. Lambda functions, using **IAM roles**, have the permissions required to interact with both **S3** and Quilt, execute workflows, and trigger downstream processes (e.g., EC2 or AWS Batch).
+- This automation ensures the pipeline starts processing new data as soon as it becomes available.
 
 #### **3. Running the Snakemake Pipeline on EC2**:
-- The **Lambda function**, using its **IAM role**, starts an **EC2 instance** to execute the Snakemake pipeline. The EC2 instance also has an **IAM role** attached to it that allows it to interact with other AWS services, such as pulling raw data from **S3** and sending logs to **CloudWatch**.
-- The Snakemake pipeline running on EC2 downloads the raw data from the S3 bucket and processes it (e.g., quality control, alignment, variant calling).
+- **Lambda**, with its **IAM role**, starts an **EC2 instance** to run the Snakemake pipeline. The EC2 instance has an **IAM role** granting it access to **S3** and **Quilt** to retrieve raw data, run the pipeline, and send logs to **CloudWatch**.
+- The pipeline, running on EC2, downloads raw data from S3 via Quilt, processes it (e.g., quality control, alignment, variant calling), and tracks metadata updates.
 
-#### **4. Storing Outputs in S3**:
-- After processing, the output files (e.g., BAM, VCF files) are uploaded back to the **S3 bucket**. The **EC2 instance**, with the permissions granted by its **IAM role**, ensures that it can store the results securely in the S3 bucket.
-- This ensures centralized, secure storage of both raw and processed data.
+#### **4. Storing Outputs in S3 and Quilt**:
+- After processing, output files (e.g., BAM, VCF files) are uploaded back to **S3** and registered in **Quilt** for versioning and data management.
+- The **EC2 instance**, using its **IAM role**, ensures that results are securely stored in both **S3** and Quilt for traceability.
 
 #### **5. Batch Processing**:
-- For large-scale data or parallel workflows, the pipeline can use **AWS Batch**. Here, Lambda submits jobs to AWS Batch, which provisions EC2 instances to run the jobs.
-- **IAM roles** attached to AWS Batch instances ensure that jobs have access to the required S3 data and permissions to execute the Snakemake pipeline securely.
+- For larger datasets, **AWS Batch** can be used for parallel processing. Lambda submits jobs to AWS Batch, which provisions EC2 instances to run the pipeline.
+- **IAM roles** on AWS Batch instances allow them to access S3 data, interact with Quilt, and execute Snakemake workflows securely.
 
 #### **6. Workflow Orchestration with Step Functions**:
-- **AWS Step Functions** orchestrate the various stages of the pipeline, ensuring tasks such as data fetching, processing, and storing occur in sequence.
-- **IAM roles** allow Step Functions to interact with Lambda, EC2, and other services, ensuring secure execution of each step in the pipeline.
+- **AWS Step Functions** orchestrate the pipeline, ensuring tasks such as data retrieval, processing, and storage are completed sequentially.
+- **IAM roles** allow Step Functions to manage permissions between Lambda, EC2, Quilt, and other services, enabling secure and orderly workflow execution.
 
 #### **7. Monitoring and Logging with CloudWatch**:
-- All logs from EC2, Lambda, and Batch are sent to **CloudWatch** for real-time monitoring.
-- The **IAM roles** attached to each of these services allow them to securely send logs and metrics to **CloudWatch**, providing detailed insights and troubleshooting capabilities.
+- Logs from EC2, Lambda, and Batch instances are sent to **CloudWatch** for real-time monitoring.
+- **IAM roles** ensure secure transmission of logs and metrics, enabling detailed monitoring and troubleshooting.
 
 #### **8. Secure Access with IAM**:
-- **IAM roles** control access between services, ensuring that each service (Lambda, EC2, Batch) has only the permissions it needs to interact with other AWS resources, ensuring security and minimizing risks.
-- IAM roles assigned to the various AWS services (S3, Lambda, EC2, Step Functions, CloudWatch) ensure secure and managed access to resources.
+- **IAM roles** govern access between AWS services and Quilt, ensuring that each service (Lambda, EC2, Batch) has the necessary permissions to interact with other AWS resources securely.
+- **IAM roles** are assigned across the pipeline, providing granular control over access to S3, Quilt, Lambda, EC2, Step Functions, and CloudWatch to ensure robust security. 
 
-#### **Data Flow Summary with IAM**:
-1. **S3 → Lambda**: New data uploaded to S3 triggers Lambda, with an **IAM role** granting it access to S3.
-2. **Lambda → EC2**: Lambda starts an EC2 instance, and **IAM roles** on EC2 allow it to fetch data from S3 and run the Snakemake pipeline.
-3. **EC2 → S3**: EC2, using its **IAM role**, stores processed results back in S3.
-4. **EC2 → CloudWatch**: EC2 sends logs to CloudWatch using **IAM permissions**.
-5. **Optional**: **AWS Batch** uses **IAM roles** to securely manage job scheduling for parallel processing.
-6. **Step Functions → Lambda/EC2**: Step Functions securely orchestrate the workflow using **IAM roles** to manage permissions.
 
-An architecture diagram and detailed explanation can be found in the figure below ![architecture_diagram.png](figures/aws-architecture-figure.png).
+### Updated **Data Flow Summary with Quilt**:
+1. **S3 → Quilt → Lambda**: Data is uploaded to S3 and registered in Quilt. This triggers a Lambda function, with **IAM roles** granting access to both S3 and Quilt.
+2. **Lambda → EC2**: Lambda starts an EC2 instance, and **IAM roles** allow the EC2 to fetch data from Quilt (via S3) and run the Snakemake pipeline.
+3. **EC2 → Quilt → S3**: Processed results are registered back into Quilt and stored in S3 using the **IAM role** assigned to EC2.
+4. **EC2 → CloudWatch**: Logs from EC2 are sent to CloudWatch using **IAM permissions**.
+5. **Optional**: **AWS Batch** uses **IAM roles** to manage job scheduling for parallel processing.
+6. **Step Functions → Lambda/EC2**: Step Functions orchestrate the workflow using **IAM roles** for managing permissions between all services.
+
+An architecture diagram and detailed explanation can be found in the figure below ![architecture_diagram.png](figures/aws-architecture.png).
 
 ## Cost Estimate
 A cost estimate for running the pipeline on AWS has been calculated using the AWS Pricing Calculator. This includes:
