@@ -25,7 +25,6 @@ This pipeline automates the migration and processing of simulated genomic sequen
 To run this project, you will need the following dependencies installed:
 
 - **Conda**: An environment manager to handle package installation and dependency management.
-- **AWS CLI**: Command-line tool for interacting with Amazon Web Services.
 
 ### Installation Instructions
 
