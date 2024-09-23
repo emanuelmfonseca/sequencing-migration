@@ -212,7 +212,7 @@ This genomic pipeline is designed to automate sequencing data processing using v
 5. **Optional**: **AWS Batch** uses **IAM roles** to securely manage job scheduling for parallel processing.
 6. **Step Functions → Lambda/EC2**: Step Functions securely orchestrate the workflow using **IAM roles** to manage permissions.
 
-An architecture diagram and detailed explanation can be found in the figure below ![architecture_diagram.png](figures/aws-architecture.png).
+An architecture diagram and detailed explanation can be found in the figure below ![architecture_diagram.png](figures/aws-architecture-figure.png).
 
 ## Cost Estimate
 A cost estimate for running the pipeline on AWS has been calculated using the AWS Pricing Calculator. This includes:
