@@ -11,6 +11,7 @@ This repository contains a bioinformatics pipeline designed to process simulated
 - [Outputs](#outputs)
 - [AWS Architecture](#aws-architecture)
 - [Cost Estimate](#cost-estimate)
+- [Development and Testing Environment](#development-and-eesting-environment)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -136,7 +137,7 @@ snakemake --cores <number_of_cores>
 snakemake --cores 4
 ```
 
-### Output
+### Outputs
 
 - The pipeline generates various outputs at each stage, including:
 
