@@ -204,7 +204,7 @@ This genomic pipeline is designed to automate sequencing data processing using v
 - **IAM roles** control access between services, ensuring that each service (Lambda, EC2, Batch) has only the permissions it needs to interact with other AWS resources, ensuring security and minimizing risks.
 - IAM roles assigned to the various AWS services (S3, Lambda, EC2, Step Functions, CloudWatch) ensure secure and managed access to resources.
 
-### **Data Flow Summary with IAM**:
+#### **Data Flow Summary with IAM**:
 1. **S3 → Lambda**: New data uploaded to S3 triggers Lambda, with an **IAM role** granting it access to S3.
 2. **Lambda → EC2**: Lambda starts an EC2 instance, and **IAM roles** on EC2 allow it to fetch data from S3 and run the Snakemake pipeline.
 3. **EC2 → S3**: EC2, using its **IAM role**, stores processed results back in S3.
@@ -212,7 +212,7 @@ This genomic pipeline is designed to automate sequencing data processing using v
 5. **Optional**: **AWS Batch** uses **IAM roles** to securely manage job scheduling for parallel processing.
 6. **Step Functions → Lambda/EC2**: Step Functions securely orchestrate the workflow using **IAM roles** to manage permissions.
 
-An architecture diagram and detailed explanation can be found in the ![architecture_diagram.png](figures/aws-architecture.png) figure.
+An architecture diagram and detailed explanation can be found in the ![architecture_diagram.png](figures/aws-architecture.png) figure below.
 
 ## Cost Estimate
 A cost estimate for running the pipeline on AWS has been calculated using the AWS Pricing Calculator. This includes:
