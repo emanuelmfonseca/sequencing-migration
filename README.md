@@ -109,7 +109,6 @@ The input data for this pipeline is automatically generated from simulations of 
   - nsamples: Number of individuals (samples) processed in each run
   - ncpus: Number of available CPU cores for parallel processing
 
-
 **Run the Pipeline**:
    To execute the pipeline, run the following command:
 
