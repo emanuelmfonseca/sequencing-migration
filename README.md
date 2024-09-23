@@ -20,18 +20,39 @@ This pipeline automates the migration and processing of simulated genomic sequen
 ## Installation
 
 ### Dependencies
-Ensure you have the following dependencies installed:
-- Python (>= 3.6)
-- Snakemake (>= 7.0)
-- AWS CLI
-- Conda
 
-You can install the required dependencies by running:
+To run this project, you will need the following dependencies installed:
 
-```bash
-conda env create -f envs/environment.yml
-conda activate sequencing-migration
-```
+- **Conda**: An environment manager to handle package installation and dependency management.
+- **AWS CLI**: Command-line tool for interacting with Amazon Web Services.
+
+### Installation Instructions
+
+You can install all the required dependencies by following these steps:
+
+1. Ensure you have Conda installed. If not, you can download it from [here](https://docs.conda.io/en/latest/miniconda.html).
+
+2. Clone the repository and navigate to the project directory:
+
+    ```bash
+    git clone https://github.com/emanuelmfonseca/sequencing-migration.git
+    cd sequencing-migration
+    ```
+
+3. Create and activate the Conda environment using the provided `environment.yml` file:
+
+    ```bash
+    conda env create -f envs/environment.yml
+    conda activate sequencing-migration
+    ```
+
+This will automatically install **Snakemake** and any other necessary packages specified in the environment configuration. **Snakemake** is a powerful workflow management system designed to create reproducible, scalable, and automated data analysis pipelines.
+
+4. Install the AWS CLI if it's not included in your Conda environment:
+
+    ```bash
+    conda install -c conda-forge awscli
+    ```
 
 ### Setup AWS Credentials
 Configure your AWS credentials for S3 access:
@@ -40,18 +61,10 @@ Configure your AWS credentials for S3 access:
 aws configure
 ```
 
-### Clone the Repository
-Clone the repository and navigate to the project directory:
-
-```bash
-git clone https://github.com/yourusername/genomics-pipeline.git
-cd genomics-pipeline
-```
-
 ## Pipeline Overview
 The pipeline processes simulated sequencing data by performing primary and secondary analysis stages, including demultiplexing, alignment, and variant calling.
 
-### Primary Analysis
+1. ### Primary Analysis
 
 The primary analysis focuses on the initial steps of preparing the data. This phase is crucial because it ensures that we generate high-quality datasets, including trimmed reads and assessments for adapter sequences. By establishing these initial steps, we improve the quality of the subsequent analysis.
 
@@ -80,7 +93,7 @@ The primary analysis focuses on the initial steps of preparing the data. This ph
     - The trimmed FASTQ files are demultiplexed into sample-specific files based on predefined patterns, allowing for separate analysis of each sample's reads.
 
 
-### Secondary Analysis
+2. ### Secondary Analysis
 
 The secondary analysis begins with indexing the reference genome, which organizes it for efficient access. This allows individual sample reads to be mapped to the reference genome, aligning their sequences accurately. Once the reads are aligned, genetic variants can be identified by comparing the sample data to the reference, enabling detailed analysis of genetic differences within the dataset.
 
@@ -96,12 +109,12 @@ The secondary analysis begins with indexing the reference genome, which organize
 - **Combine GVCFs and Genotype**
     - GVCF files from all samples are combined, and GATK's GenotypeGVCFs is run for final variant calling, resulting in a comprehensive VCF file for the weekly run.
 
-## Input Data
-The input data for this pipeline is automatically generated from simulations of genomic sequencing processes, requiring no external input.
-
 ## Usage
 
-**Edit Configuration File** 
+## Input Data
+The input data for this pipeline is automatically generated from simulations of genomic sequencing processes, eliminating the need for external input. However, modifying the configuration file is necessary, particularly to update the working directory.
+
+1. **Edit Configuration File** 
    Modify the `config.yaml` file to define the necessary paths and key parameters:
 
    #### Main Parameters
@@ -117,14 +130,14 @@ The input data for this pipeline is automatically generated from simulations of 
 snakemake --cores <number_of_cores>
 ```
 
-3. **Example**:
-   If running with 4 cores, use:
+   **Example**:
+      If running with 4 cores, use:
 
 ```bash
 snakemake --cores 4
 ```
 
-### Output
+3. ### Output
 
 - The pipeline generates various outputs at each stage, including:
 
