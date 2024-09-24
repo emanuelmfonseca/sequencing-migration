@@ -19,7 +19,7 @@ This pipeline automates the migration and processing of simulated genomic sequen
 ## Genomic Pipeline Overview
 The pipeline processes simulated sequencing data by performing primary (blue) and secondary (orange) analysis, including demultiplexing, alignment, and variant calling.
 
-![genomic-pipeline](https://github.com/user-attachments/assets/09d7889a-4f5b-40c3-94a5-8ac4ed0c7a40)
+![genomic-pipeline](https://github.com/user-attachments/assets/dd662004-dfd2-4e76-82a4-8e1f5528b86b)
 
 1. ### Primary Analysis
 
