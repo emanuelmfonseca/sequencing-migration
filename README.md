@@ -4,49 +4,19 @@ This repository contains a bioinformatics pipeline designed to process simulated
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Installation](#installation)
 - [Pipeline Overview](#pipeline-overview)
+- [AWS Architecture](#aws-architecture)
+- [Cost Estimate](#cost-estimate)
+- [Installation](#installation)
 - [Input Data](#input-data)
 - [Usage](#usage)
 - [Outputs](#outputs)
-- [AWS Architecture](#aws-architecture)
-- [Cost Estimate](#cost-estimate)
 - [Development and Testing Environment](#development-and-testing-environment)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
 This pipeline automates the migration and processing of simulated genomic sequencing data, providing robust and scalable solutions for handling large datasets. It is built using Snakemake and designed to run on AWS infrastructure, leveraging cloud services to optimize performance and reduce processing time.
-
-## Installation
-
-### Dependencies
-
-To run this project, you will need the following dependencies installed:
-
-- **Conda**: An environment manager to handle package installation and dependency management.
-
-### Installation Instructions
-
-**Follow these steps to install Conda and access the pipeline:**
-
-1. Ensure you have Conda installed. If not, you can download it from [here](https://docs.conda.io/en/latest/miniconda.html).
-
-2. Clone the repository and navigate to the project directory:
-
-    ```bash
-    git clone https://github.com/emanuelmfonseca/sequencing-migration.git
-    cd sequencing-migration
-    ```
-
-3. Create and activate the Conda environment using the provided `environment.yml` file:
-
-    ```bash
-    conda env create -f envs/environment.yml
-    conda activate sequencing-migration
-    ```
-
-This will automatically install **Snakemake** and any other necessary packages specified in the environment configuration. **Snakemake** is a powerful workflow management system designed to create reproducible, scalable, and automated data analysis pipelines.
 
 ## Pipeline Overview
 The pipeline processes simulated sequencing data by performing primary and secondary analysis stages, including demultiplexing, alignment, and variant calling.
@@ -95,6 +65,102 @@ The secondary analysis begins with indexing the reference genome, which organize
 
 - **Combine GVCFs and Genotype**
     - GVCF files from all samples are combined, and GATK's GenotypeGVCFs is run for final variant calling, resulting in a comprehensive VCF file for the weekly run.
+
+## AWS Architecture
+
+### **Genomic Data Processing Pipeline Using AWS with IAM and Quilt Integration**:
+
+This genomic pipeline is designed to automate sequencing data processing using AWS services, Quilt for data management, and secure access management through **IAM**. The workflow covers data ingestion, processing, and storage, managed entirely through AWS infrastructure with Quilt providing version control and data lineage.
+
+#### **1. Data Ingestion into S3 and Quilt**:
+- Sequencing data is uploaded to an **S3 bucket** and registered in **Quilt** for data management. S3 serves as the central storage for raw sequencing data (e.g., FASTQ files), intermediate results, and final outputs, while Quilt ensures metadata tracking and versioning.
+- **IAM roles** control access to S3 and Quilt, allowing only authorized services and users to read and write data.
+- Every time new data is uploaded, an event triggers AWS services to start the pipeline.
+
+#### **2. Lambda Trigger**:
+- **AWS Lambda** is automatically triggered when new data is uploaded to **S3** and registered in Quilt. Lambda functions, using **IAM roles**, have the permissions required to interact with both **S3** and Quilt, execute workflows, and trigger downstream processes (e.g., EC2 or AWS Batch).
+- This automation ensures the pipeline starts processing new data as soon as it becomes available.
+
+#### **3. Running the Snakemake Pipeline on EC2**:
+- **Lambda**, using its designated **IAM role**, triggers the launch of an **EC2 instance** to execute the Snakemake pipeline. The **EC2 instance** is assigned an **IAM role** with permissions to access **S3** and **Quilt** for retrieving raw data, running the pipeline, and sending logs and metrics to **CloudWatch**.
+- The pipeline, running on EC2, downloads raw data from S3 via Quilt, processes it (e.g., quality control, alignment, variant calling), and tracks metadata updates.
+
+#### **4. Storing Outputs in S3 and Quilt**:
+- After processing, output files (e.g., BAM, VCF files) are uploaded back to **S3** and registered in **Quilt** for versioning and data management.
+- The **EC2 instance**, using its **IAM role**, ensures that results are securely stored in both **S3** and Quilt for traceability.
+
+#### **5. Batch Processing**:
+- For larger datasets, **AWS Step Functions** will be used to orchestrate parallel processing. Step Functions will manage the workflow by submitting jobs to **AWS Batch**, which provisions **EC2** instances to run the Snakemake pipeline. **IAM roles** assigned to the **AWS Batch** instances will ensure secure access to **S3** data, interaction with **Quilt** for metadata management, and the execution of the Snakemake workflows.
+
+#### **6. Workflow Orchestration with Step Functions**:
+- **AWS Step Functions** orchestrate the pipeline, ensuring tasks such as data retrieval, processing, and storage are completed sequentially.
+- **IAM roles** allow Step Functions to manage permissions between Lambda, EC2, Quilt, and other services, enabling secure and orderly workflow execution.
+
+#### **7. Monitoring and Logging with CloudWatch**:
+- Logs from EC2, Lambda, and Batch instances are sent to **CloudWatch** for real-time monitoring.
+- **IAM roles** ensure secure transmission of logs and metrics, enabling detailed monitoring and troubleshooting.
+
+#### **8. Secure Access with IAM**:
+- **IAM roles** govern access between AWS services and Quilt, ensuring that each service (Lambda, EC2, Batch) has the necessary permissions to interact with other AWS resources securely.
+- **IAM roles** are assigned across the pipeline, providing granular control over access to S3, Quilt, Lambda, EC2, Step Functions, and CloudWatch to ensure robust security. 
+
+
+### Updated **Data Flow Summary with Quilt**:
+1. **S3 → Quilt → Lambda**: Data is uploaded to S3 and registered in Quilt. This triggers a Lambda function, with **IAM roles** granting access to both S3 and Quilt.
+2. **Lambda → EC2**: Lambda starts an EC2 instance, and **IAM roles** allow the EC2 to fetch data from Quilt (via S3) and run the Snakemake pipeline.
+3. **EC2 → Quilt → S3**: Processed results are registered back into Quilt and stored in S3 using the **IAM role** assigned to EC2.
+4. **EC2 → CloudWatch**: Logs from EC2 are sent to CloudWatch using **IAM permissions**.
+5. **Optional**: **AWS Batch** uses **IAM roles** to manage job scheduling for parallel processing.
+6. **Step Functions → Lambda/EC2**: Step Functions orchestrate the workflow using **IAM roles** for managing permissions between all services.
+
+#### An architecture diagram can be found in the figure below
+![aws-architecture-figure](https://github.com/user-attachments/assets/41d5386f-952e-4b98-8b2a-7cfd281f1066)
+
+## Cost Estimate
+
+**Here are preliminary cost estimates for the key AWS services involved in the genomic pipeline, as calculated using the AWS Pricing Calculator:**
+
+| Service                    | Details                                                                                                         | Value per Execution ($) | Value per Month ($) |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------|-------------------------|---------------------|
+| **Amazon S3 (Storage)**     | - **Storage**: 1.1 TB of data per month <br> - **Price for S3 Standard**: ~$0.023 per GB/month <br> - **Intermediate files**: SAM and BAM typically require 2-3 times more storage than the original raw data <br> - **Monthly storage cost**: $77.72 (3 * 1.1 TB * 1024 GB/TB * $0.023) | N/A                     | 77.72               |
+| **Amazon S3 (Retrieval)**   | - **Data Retrieval**: 1.1 TB retrieved per month <br> - **Standard retrieval price**: ~$0.01 per GB <br> - **Retrieval cost**: $11.00 (1.1 TB * 1024 GB/TB * $0.01) | 11.00                   | 11.00               |
+| **EC2 (Snakemake pipeline)**| - **Instance type**: m5.large (2 vCPUs, 8 GB RAM) <br> - **Estimated hours per sequencing run**: 24 hours per run <br> - **Runs per week**: 8 runs (total 32 runs/month) <br> - **Total hours per month**: 24 hours per run * 32 runs/month = 768 hours/month <br> - **Price for m5.large**: ~$0.096 per hour <br> - **Monthly EC2 cost**: 768 hours * $0.096 = $73.73 | 2.30                    | 73.73               |
+| **Lambda (Trigger function)**| - **Number of invocations**: 32 per month (1 per sequencing run) <br> - **Execution time**: ~1 second (1000 ms) <br> - **Memory**: 128 MB <br> - **Price**: $0.00001667 per request (100 ms increments) <br> - **Monthly Lambda cost**: $0.05 (32 invocations * $0.00001667) | 0.0016                  | 0.05                |
+| **AWS Batch**              | - **Assume 10 EC2 instances (m5.large)** running in parallel for batch jobs <br> - **Total runtime for batch jobs**: 24 hours per run <br> - **Total EC2 hours for Batch**: 10 instances * 24 hours = 240 hours per run <br> - **For 32 runs per month**: 240 hours per run * 32 runs = 7,680 hours per month <br> - **Price for m5.large**: ~$0.096 per hour <br> - **Monthly Batch cost**: 7,680 hours * $0.096 = $737.28 | 23.04                   | 737.28              |
+| **CloudWatch**             | - **Logs volume**: 10 GB/month <br> - **Custom metrics**: 5 metrics/month <br> - **Log storage cost**: ~$0.50 per GB <br> - **Metrics cost**: ~$0.30 per metric <br> - **Monthly CloudWatch cost**: $8.50 (10 GB * $0.50 + 5 metrics * $0.30) | N/A                     | 8.50                |
+| **Step Functions**         | - **State transitions**: 32 transitions (1 per sequencing run) <br> - **Cost per transition**: $0.025 per 1,000 transitions <br> - **Monthly Step Functions cost**: $0.01 (32 transitions * $0.025/1000) | 0.00031                 | 0.01                |
+
+**Total Monthly Cost**: $897.29
+
+## Installation
+
+### Dependencies
+
+To run this project, you will need the following dependencies installed:
+
+- **Conda**: An environment manager to handle package installation and dependency management.
+
+### Installation Instructions
+
+**Follow these steps to install Conda and access the pipeline:**
+
+1. Ensure you have Conda installed. If not, you can download it from [here](https://docs.conda.io/en/latest/miniconda.html).
+
+2. Clone the repository and navigate to the project directory:
+
+    ```bash
+    git clone https://github.com/emanuelmfonseca/sequencing-migration.git
+    cd sequencing-migration
+    ```
+
+3. Create and activate the Conda environment using the provided `environment.yml` file:
+
+    ```bash
+    conda env create -f envs/environment.yml
+    conda activate sequencing-migration
+    ```
+
+This will automatically install **Snakemake** and any other necessary packages specified in the environment configuration. **Snakemake** is a powerful workflow management system designed to create reproducible, scalable, and automated data analysis pipelines.
 
 ## Usage
 
@@ -150,73 +216,6 @@ snakemake --cores 4
 
   - **Variant call files (VCFs)**: Individual and combined VCFs.
     - Example: `data/fully-processed-data/genomes_fully_processed_run_1.vcf`.
-
-## AWS Architecture
-
-### **Genomic Data Processing Pipeline Using AWS with IAM and Quilt Integration**:
-
-This genomic pipeline is designed to automate sequencing data processing using AWS services, Quilt for data management, and secure access management through **IAM**. The workflow covers data ingestion, processing, and storage, managed entirely through AWS infrastructure with Quilt providing version control and data lineage.
-
-#### **1. Data Ingestion into S3 and Quilt**:
-- Sequencing data is uploaded to an **S3 bucket** and registered in **Quilt** for data management. S3 serves as the central storage for raw sequencing data (e.g., FASTQ files), intermediate results, and final outputs, while Quilt ensures metadata tracking and versioning.
-- **IAM roles** control access to S3 and Quilt, allowing only authorized services and users to read and write data.
-- Every time new data is uploaded, an event triggers AWS services to start the pipeline.
-
-#### **2. Lambda Trigger**:
-- **AWS Lambda** is automatically triggered when new data is uploaded to **S3** and registered in Quilt. Lambda functions, using **IAM roles**, have the permissions required to interact with both **S3** and Quilt, execute workflows, and trigger downstream processes (e.g., EC2 or AWS Batch).
-- This automation ensures the pipeline starts processing new data as soon as it becomes available.
-
-#### **3. Running the Snakemake Pipeline on EC2**:
-- **Lambda**, with its **IAM role**, starts an **EC2 instance** to run the Snakemake pipeline. The EC2 instance has an **IAM role** granting it access to **S3** and **Quilt** to retrieve raw data, run the pipeline, and send logs to **CloudWatch**.
-- The pipeline, running on EC2, downloads raw data from S3 via Quilt, processes it (e.g., quality control, alignment, variant calling), and tracks metadata updates.
-
-#### **4. Storing Outputs in S3 and Quilt**:
-- After processing, output files (e.g., BAM, VCF files) are uploaded back to **S3** and registered in **Quilt** for versioning and data management.
-- The **EC2 instance**, using its **IAM role**, ensures that results are securely stored in both **S3** and Quilt for traceability.
-
-#### **5. Batch Processing**:
-- For larger datasets, **AWS Step Functions** will be used to orchestrate parallel processing. Step Functions will manage the workflow by submitting jobs to **AWS Batch**, which provisions **EC2** instances to run the Snakemake pipeline. **IAM roles** assigned to the **AWS Batch** instances will ensure secure access to **S3** data, interaction with **Quilt** for metadata management, and the execution of the Snakemake workflows.
-
-#### **6. Workflow Orchestration with Step Functions**:
-- **AWS Step Functions** orchestrate the pipeline, ensuring tasks such as data retrieval, processing, and storage are completed sequentially.
-- **IAM roles** allow Step Functions to manage permissions between Lambda, EC2, Quilt, and other services, enabling secure and orderly workflow execution.
-
-#### **7. Monitoring and Logging with CloudWatch**:
-- Logs from EC2, Lambda, and Batch instances are sent to **CloudWatch** for real-time monitoring.
-- **IAM roles** ensure secure transmission of logs and metrics, enabling detailed monitoring and troubleshooting.
-
-#### **8. Secure Access with IAM**:
-- **IAM roles** govern access between AWS services and Quilt, ensuring that each service (Lambda, EC2, Batch) has the necessary permissions to interact with other AWS resources securely.
-- **IAM roles** are assigned across the pipeline, providing granular control over access to S3, Quilt, Lambda, EC2, Step Functions, and CloudWatch to ensure robust security. 
-
-
-### Updated **Data Flow Summary with Quilt**:
-1. **S3 → Quilt → Lambda**: Data is uploaded to S3 and registered in Quilt. This triggers a Lambda function, with **IAM roles** granting access to both S3 and Quilt.
-2. **Lambda → EC2**: Lambda starts an EC2 instance, and **IAM roles** allow the EC2 to fetch data from Quilt (via S3) and run the Snakemake pipeline.
-3. **EC2 → Quilt → S3**: Processed results are registered back into Quilt and stored in S3 using the **IAM role** assigned to EC2.
-4. **EC2 → CloudWatch**: Logs from EC2 are sent to CloudWatch using **IAM permissions**.
-5. **Optional**: **AWS Batch** uses **IAM roles** to manage job scheduling for parallel processing.
-6. **Step Functions → Lambda/EC2**: Step Functions orchestrate the workflow using **IAM roles** for managing permissions between all services.
-
-#### An architecture diagram can be found in the figure below
-![aws-architecture-figure](https://github.com/user-attachments/assets/41d5386f-952e-4b98-8b2a-7cfd281f1066)
-
-## Cost Estimate
-
-**Here are preliminary cost estimates for the key AWS services involved in the genomic pipeline, as calculated using the AWS Pricing Calculator:**
-
-| Service                    | Details                                                                                                         | Value per Execution ($) | Value per Month ($) |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------|-------------------------|---------------------|
-| **Amazon S3 (Storage)**     | - **Storage**: 1.1 TB of data per month <br> - **Price for S3 Standard**: ~$0.023 per GB/month <br> - **Intermediate files**: SAM and BAM typically require 2-3 times more storage than the original raw data <br> - **Monthly storage cost**: $77.72 (3 * 1.1 TB * 1024 GB/TB * $0.023) | N/A                     | 77.72               |
-| **Amazon S3 (Retrieval)**   | - **Data Retrieval**: 1.1 TB retrieved per month <br> - **Standard retrieval price**: ~$0.01 per GB <br> - **Retrieval cost**: $11.00 (1.1 TB * 1024 GB/TB * $0.01) | 11.00                   | 11.00               |
-| **EC2 (Snakemake pipeline)**| - **Instance type**: m5.large (2 vCPUs, 8 GB RAM) <br> - **Estimated hours per sequencing run**: 24 hours per run <br> - **Runs per week**: 8 runs (total 32 runs/month) <br> - **Total hours per month**: 24 hours per run * 32 runs/month = 768 hours/month <br> - **Price for m5.large**: ~$0.096 per hour <br> - **Monthly EC2 cost**: 768 hours * $0.096 = $73.73 | 2.30                    | 73.73               |
-| **Lambda (Trigger function)**| - **Number of invocations**: 32 per month (1 per sequencing run) <br> - **Execution time**: ~1 second (1000 ms) <br> - **Memory**: 128 MB <br> - **Price**: $0.00001667 per request (100 ms increments) <br> - **Monthly Lambda cost**: $0.05 (32 invocations * $0.00001667) | 0.0016                  | 0.05                |
-| **AWS Batch**              | - **Assume 10 EC2 instances (m5.large)** running in parallel for batch jobs <br> - **Total runtime for batch jobs**: 24 hours per run <br> - **Total EC2 hours for Batch**: 10 instances * 24 hours = 240 hours per run <br> - **For 32 runs per month**: 240 hours per run * 32 runs = 7,680 hours per month <br> - **Price for m5.large**: ~$0.096 per hour <br> - **Monthly Batch cost**: 7,680 hours * $0.096 = $737.28 | 23.04                   | 737.28              |
-| **CloudWatch**             | - **Logs volume**: 10 GB/month <br> - **Custom metrics**: 5 metrics/month <br> - **Log storage cost**: ~$0.50 per GB <br> - **Metrics cost**: ~$0.30 per metric <br> - **Monthly CloudWatch cost**: $8.50 (10 GB * $0.50 + 5 metrics * $0.30) | N/A                     | 8.50                |
-| **Step Functions**         | - **State transitions**: 32 transitions (1 per sequencing run) <br> - **Cost per transition**: $0.025 per 1,000 transitions <br> - **Monthly Step Functions cost**: $0.01 (32 transitions * $0.025/1000) | 0.00031                 | 0.01                |
-
-**Total Monthly Cost**: $897.29
-
 
 ## Development and Testing Environment
 This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
