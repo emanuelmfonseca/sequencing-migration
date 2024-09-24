@@ -222,7 +222,7 @@ snakemake --cores 4
 
 **The final and most crucial output of the pipeline is the VCF file, which consolidates all variant calling data and serves as the primary result for downstream analyses.**
 
-![vcf-file](https://github.com/user-attachments/assets/9230bceb-db31-4bcf-b486-8188a9cd7bea)
+![vcf-file](https://github.com/user-attachments/assets/0d3900ec-76ce-45ee-b396-9c032135ae2e)
 
 ## Development and Testing Environment
 This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
