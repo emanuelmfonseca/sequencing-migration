@@ -141,8 +141,6 @@ To run this project, you will need the following dependencies installed:
 
 **Note**: All other dependencies are specified in the `yaml` file and will be automatically installed when the environment is created, ensuring that all necessary tools and libraries are properly set up.
 
-This will create a new Conda environment with all the necessary dependencies installed.
-
 ### Installation Instructions
 
 **Follow these steps to install Conda and access the pipeline:**
