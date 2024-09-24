@@ -5,7 +5,7 @@ This repository contains a bioinformatics pipeline designed to process simulated
 ## Table of Contents
 - [Introduction](#introduction)
 - [Genomic Pipeline Overview](#genomic-pipeline-overview)
-- [AWS Architecture](#aws-architecture)
+- [AWS Architecture Overview](#aws-architecture-overview)
 - [Cost Estimate](#cost-estimate)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -66,7 +66,7 @@ The secondary analysis involves the assembly of the genome, organizing the seque
 - **Combine GVCFs and Genotype**
     - GVCF files from all samples are combined, and GATK's GenotypeGVCFs is run for final variant calling, resulting in a comprehensive VCF file for the weekly run.
 
-## AWS Architecture
+## AWS Architecture Overview
 
 ### **Genomic Data Processing Pipeline Using AWS with IAM and Quilt Integration**:
 This genomic pipeline is designed to automate sequencing data processing using AWS services, Quilt for data management, and secure access management through **IAM**. The workflow covers data ingestion, processing, and storage, managed entirely through AWS infrastructure with Quilt providing version control and data lineage.
@@ -194,7 +194,7 @@ snakemake --cores 4
 
 ### Outputs
 
-- The pipeline generates various outputs at each stage, including:
+- The pipeline generates various outputs at each step, including:
 
   - **SNP matrix**: A matrix of single nucleotide polymorphisms for each sample, used for population genetic analyses.
     - Example: `data/demographic-simulations/snp-matrix_1.txt`.
