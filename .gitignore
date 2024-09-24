@@ -3,6 +3,7 @@
 
 .snakemake
 /data
+/figures
 !scripts/*.py
 .DS_Store
 
