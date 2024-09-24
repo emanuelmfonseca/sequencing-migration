@@ -21,6 +21,8 @@ This pipeline automates the migration and processing of simulated genomic sequen
 ## Genomic Pipeline Overview
 The pipeline processes simulated sequencing data by performing primary and secondary analysis stages, including demultiplexing, alignment, and variant calling.
 
+![genomic-pipeline](https://github.com/user-attachments/assets/09d7889a-4f5b-40c3-94a5-8ac4ed0c7a40)
+
 1. ### Primary Analysis
 
 The primary analysis focuses on the initial steps of preparing the data. This phase is crucial because it ensures that we generate high-quality datasets, including trimmed reads and assessments for adapter sequences. By establishing these initial steps, we improve the quality of the subsequent analysis.
