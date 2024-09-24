@@ -4,7 +4,7 @@ This repository contains a bioinformatics pipeline designed to process simulated
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Pipeline Overview](#pipeline-overview)
+- [Pipeline Overview](#genomic-pipeline-overview)
 - [AWS Architecture](#aws-architecture)
 - [Cost Estimate](#cost-estimate)
 - [Installation](#installation)
