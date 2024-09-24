@@ -364,8 +364,9 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
         input:
             # Reference genome file for the current run
             reference=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.fasta",
-            # Index BAM file for validation
+            # Index BAM file and vcf for validation
             index_bam=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_1/dedup_sorted_aligned_genome_1.bam.bai"
+            vcf=f"data/genome-simulations/genomes_1/demultiplexed/sample_1/sample_1_1.g.vcf"
         output:
             # Combined VCF file from multiple GVCFs
             comb_vcf=f"data/genome-simulations/genomes_{weekly_run}/gatk/combined_genomes_run_{weekly_run}.g.vcf",
