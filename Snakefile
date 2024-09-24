@@ -74,7 +74,7 @@ rule generate_snps:
         seed = config["seed"]                 # Random seed for reproducibility
     conda:
         # Specify the conda environment for dependencies
-        "envs/environment.yml"
+        "environment.yml"
     shell:
         "python {input.script} {params.nref} {params.nu1} {params.t1} {params.nsamples} {params.ploidy} {params.mu} {params.genome_size} {params.recomb} {params.seed} {output}"
 
@@ -94,7 +94,7 @@ rule generate_genome:
         individual=expand("data/genome-simulations/genomes_{weekly_run}/fasta/individual_genome_{ind}.fasta", weekly_run=range(1, config["weekly_runs"] + 1), ind=range(1, config["nsamples"] + 1))  
     conda:
         # Specify the conda environment for dependencies
-        "envs/environment.yml" 
+        "environment.yml" 
     shell:
         # Call the genome simulation script with input and output
         "python {input.script} {input.working_directory} {input.snp_matrices}"
@@ -116,7 +116,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             nsamples=config["nsamples"]
         conda:
             # Specify the conda environment for dependencies
-            "envs/environment.yml"  
+            "environment.yml"  
         shell:
             """
             touch {output}  # Ensure the output file exists
@@ -139,7 +139,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             ncpus=config["ncpus"]
         conda:
             # Specify the Conda environment to ensure that all dependencies for the rule are installed.
-            "envs/environment.yml"
+            "environment.yml"
         shell:
             """
             # Generate simulated reads using InSilicoSeq (iss) with the HiSeq model.
@@ -164,7 +164,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             weekly_run=weekly_run,
         conda:
             # Specify the Conda environment.
-            "envs/environment.yml"
+            "environment.yml"
         shell:
             # Run FastQC on the input files, save output in the qc folder for the current run.
             """
@@ -194,7 +194,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             weekly_run=weekly_run
         conda:
             # Specify the Conda environment for Trimmomatic.
-            "envs/environment.yml"
+            "environment.yml"
         shell:
             # Run Trimmomatic to trim the input FASTQ files.
             """
@@ -219,7 +219,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             weekly_run=weekly_run,
         conda:
             # Specify the Conda environment.
-            "envs/environment.yml"
+            "environment.yml"
         shell:
             # Run FastQC on the input files, save output in the qc folder for the current run.
             """
@@ -252,7 +252,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             patterns=["Ind" + str(i) for i in range(1, config['nsamples'] + 1)]  # List of patterns, not a string
         conda:
             # Specify the Conda environment.
-            "envs/environment.yml"
+            "environment.yml"
         shell:
             # Loop over patterns and demultiplex each one using seqkit.
             """
@@ -276,7 +276,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             dicti=f"data/genome-simulations/genomes_{weekly_run}/fasta/reference_genome_{weekly_run}.dict",
         conda:
             # Specify the Conda environment.
-            "envs/environment.yml"
+            "environment.yml"
         shell:
             """
             # Index the reference genome
@@ -317,7 +317,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
                 RGSM=f"tsk_{sample}"   # Sample name
             conda:
                 # Specify the Conda environment.
-                "envs/environment.yml"
+                "environment.yml"
             threads: config["ncpus"]  # Number of threads for BWA
             shell:
                 """
@@ -350,7 +350,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
                 vcf=f"data/genome-simulations/genomes_{weekly_run}/demultiplexed/sample_{sample}/sample_{weekly_run}_{sample}.g.vcf"
             conda:
                 # Specify the Conda environment.
-                "envs/environment.yml"
+                "environment.yml"
             threads: config["ncpus"]  # Number of threads for GATK.
             shell:
                 """
@@ -376,7 +376,7 @@ for weekly_run in range(1, config["weekly_runs"] + 1):
             weekly_run=weekly_run
         conda:
             # Specify the Conda environment.
-            "envs/environment.yml"
+            "environment.yml"
         threads: config["ncpus"]  # Number of threads for GATK
         shell:
             """
