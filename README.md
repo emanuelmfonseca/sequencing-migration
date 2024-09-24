@@ -18,7 +18,7 @@ This repository contains a bioinformatics pipeline designed to process simulated
 ## Introduction
 This pipeline automates the migration and processing of simulated genomic sequencing data, providing robust and scalable solutions for handling large datasets. It is built using Snakemake and designed to run on AWS infrastructure, leveraging cloud services to optimize performance and reduce processing time.
 
-## Pipeline Overview
+## Genomic Pipeline Overview
 The pipeline processes simulated sequencing data by performing primary and secondary analysis stages, including demultiplexing, alignment, and variant calling.
 
 1. ### Primary Analysis
@@ -35,7 +35,7 @@ The primary analysis focuses on the initial steps of preparing the data. This ph
     - Individual genome FASTA files are concatenated into multi-FASTA files for each weekly run. This prepares the data for generating reads in the next step.
 
 - **Simulate Reads**
--    The multi-FASTA genomes are used to generate simulated FASTQ files (R1 and R2) using the InSilicoSeq tool. This step simulates sequencing reads for the genome.
+  - The multi-FASTA genomes are used to generate simulated FASTQ files (R1 and R2) using the InSilicoSeq tool. This step simulates sequencing reads for the genome.
 
 - **Quality Assessment of Raw Reads**
     - FastQC reports are generated for the simulated FASTQ files to assess the quality of the sequencing data.
@@ -69,6 +69,10 @@ The secondary analysis begins with indexing the reference genome, which organize
 ## AWS Architecture
 
 ### **Genomic Data Processing Pipeline Using AWS with IAM and Quilt Integration**:
+
+
+#### An architecture diagram can be found in the figure below
+![aws-architecture-figure](https://github.com/user-attachments/assets/41d5386f-952e-4b98-8b2a-7cfd281f1066)
 
 This genomic pipeline is designed to automate sequencing data processing using AWS services, Quilt for data management, and secure access management through **IAM**. The workflow covers data ingestion, processing, and storage, managed entirely through AWS infrastructure with Quilt providing version control and data lineage.
 
@@ -104,7 +108,6 @@ This genomic pipeline is designed to automate sequencing data processing using A
 - **IAM roles** govern access between AWS services and Quilt, ensuring that each service (Lambda, EC2, Batch) has the necessary permissions to interact with other AWS resources securely.
 - **IAM roles** are assigned across the pipeline, providing granular control over access to S3, Quilt, Lambda, EC2, Step Functions, and CloudWatch to ensure robust security. 
 
-
 ### Updated **Data Flow Summary with Quilt**:
 1. **S3 → Quilt → Lambda**: Data is uploaded to S3 and registered in Quilt. This triggers a Lambda function, with **IAM roles** granting access to both S3 and Quilt.
 2. **Lambda → EC2**: Lambda starts an EC2 instance, and **IAM roles** allow the EC2 to fetch data from Quilt (via S3) and run the Snakemake pipeline.
@@ -112,9 +115,6 @@ This genomic pipeline is designed to automate sequencing data processing using A
 4. **EC2 → CloudWatch**: Logs from EC2 are sent to CloudWatch using **IAM permissions**.
 5. **Optional**: **AWS Batch** uses **IAM roles** to manage job scheduling for parallel processing.
 6. **Step Functions → Lambda/EC2**: Step Functions orchestrate the workflow using **IAM roles** for managing permissions between all services.
-
-#### An architecture diagram can be found in the figure below
-![aws-architecture-figure](https://github.com/user-attachments/assets/41d5386f-952e-4b98-8b2a-7cfd281f1066)
 
 ## Cost Estimate
 
