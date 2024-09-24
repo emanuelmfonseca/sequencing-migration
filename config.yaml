@@ -4,18 +4,19 @@
 working_directory: "/Users/emanuelmfonseca/project/sequencing-migration"
 
 # Set the number of sequencing runs that are performed per week.
-weekly_runs: 2
+weekly_runs: 8
 
 # number of CPUs available for analysis
 ncpus: 4
 
 # Parameters for the simulations
 nref: 1e4         # Effective population size in the past
-nu1: 10          # Current population size relative to the reference population
+nu1: 10           # Current population size relative to the reference population
 t1: 0.1           # Time relative to the reference population
-nsamples: 2        # Number of individuals to sample
+nsamples: 10       # Number of individuals to sample
 ploidy: 2         # Ploidy level (2 for diploid)
 mu: 1e-8          # Mutation rate
 genome_size: 1e5  # Length of the genome
 recomb: 1e-8      # Recombination rate
-seed: 42           # Random seed for reproducibility
+nreads: 1e3       # Define the number of reads to simulate
+seed: 42          # Random seed for reproducibility
