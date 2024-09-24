@@ -170,13 +170,21 @@ This will automatically install **Snakemake** and any other necessary packages s
 ### Input Data
 The input data for this pipeline is automatically generated from simulations of genomic sequencing processes, eliminating the need for external input. However, modifying the configuration file is necessary, particularly to update the working directory.
 
-**Edit Configuration File**: Modify the `config.yaml` file to define the necessary paths and key parameters:
+Here's a polished version of your instruction for editing the configuration file:
+
+---
+
+### Edit Configuration File
+
+Modify the `config.yaml` file to define the necessary paths and key parameters:
+
+**Warning**: Do not forget to change the working directory; otherwise, it may cause the pipeline to malfunction.
 
 #### Main Parameters
-  - working_directory: Specify the full path to the working directory for your project
-  - weekly_runs: Number of independent genomic runs to perform
-  - nsamples: Number of individuals (samples) processed in each run
-  - ncpus: Number of available CPU cores for parallel processing
+- **working_directory**: Specify the full path to the working directory for your project.
+- **weekly_runs**: Number of independent genomic runs to perform.
+- **nsamples**: Number of individuals (samples) to be processed in each run.
+- **ncpus**: Number of available CPU cores for parallel processing.
 
 **Run the Pipeline**:
    To execute the pipeline, run the following command:
