@@ -69,10 +69,10 @@ The secondary analysis begins with indexing the reference genome, which organize
 ## AWS Architecture
 
 ### **Genomic Data Processing Pipeline Using AWS with IAM and Quilt Integration**:
+This genomic pipeline is designed to automate sequencing data processing using AWS services, Quilt for data management, and secure access management through **IAM**. The workflow covers data ingestion, processing, and storage, managed entirely through AWS infrastructure with Quilt providing version control and data lineage.
 
 ![aws-architecture-figure](https://github.com/user-attachments/assets/41d5386f-952e-4b98-8b2a-7cfd281f1066)
 
-This genomic pipeline is designed to automate sequencing data processing using AWS services, Quilt for data management, and secure access management through **IAM**. The workflow covers data ingestion, processing, and storage, managed entirely through AWS infrastructure with Quilt providing version control and data lineage.
 
 #### **1. Data Ingestion into S3 and Quilt**:
 - Sequencing data is uploaded to an **S3 bucket** and registered in **Quilt** for data management. S3 serves as the central storage for raw sequencing data (e.g., FASTQ files), intermediate results, and final outputs, while Quilt ensures metadata tracking and versioning.
