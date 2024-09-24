@@ -220,6 +220,8 @@ snakemake --cores 4
   - **Variant call files (VCFs)**: Individual and combined VCFs.
     - Example: `data/fully-processed-data/genomes_fully_processed_run_1.vcf`.
 
+**The final and most crucial output of the pipeline is the VCF file, which consolidates all variant calling data and serves as the primary result for downstream analyses.**
+
 ## Development and Testing Environment
 This pipeline was developed on a **MacBook 2020 with an M1 chip**. The tutorial associated with this project was tested on another machine with the same configuration.
 
